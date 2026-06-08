@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html class="" lang="en" style="background-color: #ffffff;">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYHitch Pass | Pricing Plans</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary": "#3b82f6","secondary": "#3b82f6","electric-cyan": "#3b82f6","surface": "#ffffff","surface-container": "#f0f9ff","surface-container-high": "#e0f2fe","surface-container-highest": "#bae6fd","on-surface": "#0f172a","on-surface-variant": "#334155","background": "#f8fafc","on-background": "#0f172a","error":"#ef4444","error-container":"#7f1d1d","on-error":"#ffffff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"max-width":"1280px","margin-mobile":"20px","margin-desktop":"48px",gutter:"16px",base:"8px"},fontFamily:{"label-sm":["Geist"],"label-md":["Geist"],"display-lg":["Geist"],"body-md":["Inter"],"display-lg-mobile":["Geist"],"headline-md":["Geist"],"body-lg":["Inter"],"headline-lg":["Geist"]},fontSize:{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.05em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.04em","fontWeight":"800"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"display-lg-mobile":["32px",{"lineHeight":"38px","letterSpacing":"-0.03em","fontWeight":"800"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-lg":["30px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+<style>
+html {
+  background-color: #ffffff;
+}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+.glass-panel{background:linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%), rgba(7,11,25,0.55);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.15), inset 0 -1px 0 0 rgba(255,255,255,0.05);position:relative;overflow:hidden}
+.glass-panel::before{content:'';position:absolute;top:0;left:-150%;width:50%;height:100%;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.08) 50%,rgba(255,255,255,0) 100%);transform:skewX(-25deg);transition:left 0.75s ease-in-out;pointer-events:none;z-index:1}
+.glass-panel:hover::before{left:150%}
+.liquid-hover{transition:all .4s cubic-bezier(0.16,1,0.3,1)}
+.liquid-hover:hover{transform:scale(1.03) translateY(-4px);box-shadow:0 12px 40px -10px rgba(59, 130, 246,0.2);border-color:rgba(59, 130, 246,0.2)}
+.reveal{opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(0.16,1,0.3,1)}
+.reveal.active{opacity:1;transform:translateY(0)}
+.orb-1{animation:morph 12s ease-in-out infinite both alternate,float1 24s ease-in-out infinite;filter:blur(140px);opacity:.08}
+.orb-2{animation:morph 14s ease-in-out infinite both alternate,float2 28s ease-in-out infinite;filter:blur(140px);opacity:.06}
+.orb-3{animation:morph 16s ease-in-out infinite both alternate,float3 32s ease-in-out infinite,pulse3 10s ease-in-out infinite alternate;filter:blur(140px)}
+@keyframes float1{0%{transform:translate(0,0) scale(1)}33%{transform:translate(80px,-100px) scale(1.15)}66%{transform:translate(-50px,50px) scale(0.9)}100%{transform:translate(0,0) scale(1)}}
+@keyframes float2{0%{transform:translate(0,0) scale(1)}33%{transform:translate(-100px,60px) scale(0.85)}66%{transform:translate(50px,-90px) scale(1.1)}100%{transform:translate(0,0) scale(1)}}
+@keyframes float3{0%{transform:translate(0,0) scale(1)}50%{transform:translate(120px,90px) scale(1.2)}100%{transform:translate(0,0) scale(1)}}
+@keyframes pulse1 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.28; } }
+@keyframes pulse2 { 0%, 100% { opacity: 0.12; } 50% { opacity: 0.25; } }
+@keyframes pulse3 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.22; } }
+@keyframes morph{
+  0%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}
+  50%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%}
+  100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}
+}50%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%}100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}}
+body{animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.app-header{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:none}
+.nav-item-lamp {
+  position: relative;
+  transition: all 0.3s ease;
+}
+.nav-item-lamp:hover {
+  color: #ffffff !important;
+}
+
+/* Premium Light Dropdown Menu style */
+.nav-dropdown-menu {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
+  border-radius: 1rem !important;
+  min-width: 180px !important;
+}
+.nav-dropdown-item {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-family: 'Geist', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  padding: 12px 20px !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+.nav-dropdown-item:last-child {
+  border-bottom: none !important;
+}
+.nav-dropdown-item:hover {
+  color: #3b82f6 !important;
+  background-color: rgba(59, 130, 246, 0.15) !important;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.4) !important;
+}
+/* Active capsule styling */
+.nav-item-lamp.active-pill {
+  color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.12) !important;
+  border-radius: 9999px !important;
+}
+
+.hover-trail-button {
+  position: relative;
+  isolate: isolate;
+  background: rgba(7, 10, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease, filter 0.3s ease;
+}
+.hover-trail-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 
+    inset 0 0 0 1px rgba(170, 202, 255, 0.25),
+    inset 0 0 16px 0 rgba(170, 202, 255, 0.12),
+    inset 0 -3px 12px 0 rgba(170, 202, 255, 0.18),
+    0 1px 3px 0 rgba(0, 0, 0, 0.5),
+    0 4px 12px 0 rgba(0, 0, 0, 0.45);
+  mix-blend-mode: multiply;
+  transition: transform 0.3s ease;
+}
+.hover-trail-button:active::before {
+  transform: scale(0.975);
+}
+.pointer-trail-circle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  filter: blur(12px);
+  -webkit-filter: blur(12px);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-dropdown-menu.show-dropdown {
+  display: flex !important;
+}
+
+
+/* ===== LIGHT MODE OVERRIDES ===== */
+html, body { background-color: #ffffff !important; color: #0f172a; }
+h1.text-white, h2.text-white, h3.text-white { color: #0f172a !important; }
+.glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,249,255,0.90) 100%) !important;
+  border: 1px solid rgba(59,130,246,0.18) !important;
+  box-shadow: 0 8px 32px 0 rgba(59,130,246,0.10), inset 0 1px 0 0 rgba(255,255,255,0.9) !important;
+}
+.glass-morphism {
+  background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(240,249,255,0.93) 100%) !important;
+  border: 1px solid rgba(59,130,246,0.18) !important;
+  box-shadow: 0 20px 50px rgba(59,130,246,0.12) !important;
+}
+.nav-item { color: rgba(15,23,42,0.65) !important; }
+.nav-item:hover { color: #1d4ed8 !important; }
+.nav-item.active { color: #3b82f6 !important; text-decoration-color: #3b82f6 !important; }
+.nav-item-lamp:hover { color: #1d4ed8 !important; }
+.nav-item-lamp.active, .nav-item-lamp.active-pill {
+  color: #3b82f6 !important;
+  background: rgba(59,130,246,0.10) !important;
+}
+.nav-dropdown-menu {
+  background: rgba(255,255,255,0.98) !important;
+  border: 1px solid rgba(59,130,246,0.15) !important;
+  box-shadow: 0 20px 40px rgba(59,130,246,0.12) !important;
+}
+.nav-dropdown-item { color: rgba(15,23,42,0.75) !important; border-bottom: 1px solid rgba(59,130,246,0.08) !important; }
+.nav-dropdown-item:hover { color: #3b82f6 !important; background-color: rgba(59,130,246,0.06) !important; text-shadow: none !important; }
+.hover-trail-button {
+  background: rgba(255,255,255,0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(59,130,246,0.15) !important;
+  color: #1e293b !important;
+}
+.hover-trail-button::before { box-shadow: inset 0 0 0 1px rgba(59,130,246,0.2) !important; mix-blend-mode: normal !important; }
+.animated-shiny-text {
+  background: linear-gradient(90deg, #1e293b 0%, #3b82f6 30%, #0f172a 50%, #3b82f6 70%, #1e293b 100%) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.text-stroke { -webkit-text-stroke: 1px #1e293b !important; color: transparent !important; }
+.app-header { background: rgba(255,255,255,0.85) !important; backdrop-filter: blur(12px) !important; border-bottom: 1px solid rgba(59,130,246,0.10) !important; }
+
+</style>
+</head>
+<body class="text-on-background font-body-md antialiased min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- Ambient Liquid Backdrop (Cobalt/Navy Gradient) -->
+<div class="fixed inset-0 z-[-2] pointer-events-none" style="background: linear-gradient(to bottom, #ffffff 0%, #f0f9ff 25%, #dbeafe 55%, #eff6ff 80%, #ffffff 100%);"></div>
+<div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+  <div class="absolute top-[20%] left-[-15%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-br from-blue-500/35 to-transparent orb-1 mix-blend-multiply"></div>
+  <div class="absolute bottom-[10%] right-[-15%] w-[70vw] h-[70vw] rounded-full bg-gradient-to-tr from-blue-400/30 to-transparent orb-2 mix-blend-multiply"></div>
+  <div class="absolute top-[50%] left-[30%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-blue-300/25 to-transparent orb-3 mix-blend-multiply"></div>
+</div>
+
+<header class="fixed top-0 w-full z-50 app-header">
+  <nav class="flex items-center justify-between h-[60px] px-6 md:px-10 max-w-full">
+    <a href="/home" class="shrink-0 mr-6 flex items-center translate-y-[6px]">
+      <img src="/logo.webp" alt="MYHitch Pass" width="200" height="200" class="w-[170px] md:w-[200px] h-auto object-contain select-none" style="filter: none;">
+    </a>
+    <div class="shrink-0 flex items-center gap-3 relative z-30">
+      <a href="/tickets" class="hover-trail-button inline-flex items-center gap-2 text-white px-4 py-2.5 rounded-full font-bold text-xs shrink-0">
+        <span class="material-symbols-outlined text-[16px] text-primary">confirmation_number</span>
+        <span class="hidden 2xl:inline">My Tickets</span>
+        <span class="w-4 h-4 rounded-full bg-error text-white flex items-center justify-center text-[9px] font-extrabold ml-0.5">2</span>
+      </a>
+      <a href="/profile" class="hover-trail-button inline-flex items-center gap-2 text-white px-4 py-2.5 rounded-full font-bold text-xs shrink-0">
+        <span class="material-symbols-outlined text-[16px] text-primary">person</span>
+        <span class="hidden 2xl:inline font-label-md">PROFILE</span>
+      </a>
+      <a href="/home" class="hover-trail-button flex items-center justify-center w-10 h-10 rounded-full text-white shrink-0 relative">
+        <span class="material-symbols-outlined text-primary" style="font-size:20px">notifications</span>
+        <span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error animate-pulse"></span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- Floating Navigation Bar -->
+<div class="fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-3 pointer-events-auto">
+  <div class="flex items-center gap-1 bg-white/95 border border-blue-100 backdrop-blur-xl p-1 rounded-full shadow-xl shadow-blue-100/60">
+    <a href="/home" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">home</span>
+      <span class="hidden lg:inline">HOME</span>
+    </a>
+    <!-- Events Dropdown -->
+    <div class="relative group shrink-0">
+      <a href="/upcoming" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1 text-slate-700 hover:text-blue-600">
+        <span class="material-symbols-outlined text-[18px] lg:hidden">event</span>
+        <span class="hidden lg:inline">EVENTS</span>
+        <span class="text-[9px] opacity-70 ml-0.5">▼</span>
+      </a>
+      <div class="hidden group-hover:flex flex-col absolute bottom-full sm:top-full left-1/2 -translate-x-1/2 mb-2 sm:mb-0 sm:mt-2 z-50 nav-dropdown-menu">
+        <a href="/upcoming" class="nav-dropdown-item">Upcoming Events</a>
+        <a href="/explore" class="nav-dropdown-item">Categories</a>
+        <a href="/broadway" class="nav-dropdown-item">Broadway Tickets</a>
+      </div>
+    </div>
+    <a href="/pricing" class="nav-item-lamp active-pill px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">payments</span>
+      <span class="hidden lg:inline">PRICING</span>
+    </a>
+    <a href="/servicers" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">room_service</span>
+      <span class="hidden lg:inline">SERVICERS</span>
+    </a>
+    <a href="/about-us" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">info</span>
+      <span class="hidden lg:inline">ABOUT US</span>
+    </a>
+    <!-- Organiser Dropdown -->
+    <div class="relative group shrink-0">
+      <a href="/organizer" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1 text-slate-700 hover:text-blue-600">
+        <span class="material-symbols-outlined text-[18px] lg:hidden">corporate_fare</span>
+        <span class="hidden lg:inline">ORGANISER</span>
+        <span class="text-[9px] opacity-70 ml-0.5">▼</span>
+      </a>
+      <div class="hidden group-hover:flex flex-col absolute bottom-full sm:top-full left-1/2 -translate-x-1/2 mb-2 sm:mb-0 sm:mt-2 z-50 nav-dropdown-menu">
+        <a href="/organizer" class="nav-dropdown-item">Dashboard</a>
+        <a href="/organizer" class="nav-dropdown-item">Create Event</a>
+        <a href="/organizer" class="nav-dropdown-item">Analytics</a>
+      </div>
+    </div>
+    <a href="/contact-us" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">mail</span>
+      <span class="hidden lg:inline">CONTACT US</span>
+    </a>
+  </div>
+</div>
+
+<main class="flex-grow pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full relative z-20">
+  <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 reveal active">
+    <span class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-700 px-4 py-1.5 rounded-full text-[11px] font-bold tracking-wider backdrop-blur-md mb-3 uppercase">
+      <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> TRANSPARENT PRICING
+    </span>
+    <h1 class="font-display-lg text-4xl md:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-none">PRICING PLANS</h1>
+    <p class="text-on-surface-variant font-body-lg text-lg">Choose the right plan to get verified entry passes or start selling tickets seamlessly.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Free plan -->
+    <div class="glass-panel rounded-3xl p-8 flex flex-col justify-between reveal active liquid-hover">
+      <div class="space-y-6">
+        <div>
+          <span class="font-label-sm text-xs tracking-wider text-on-surface-variant uppercase">Standard Plan</span>
+          <h2 class="text-3xl font-extrabold text-white mt-2">Free</h2>
+          <p class="text-on-surface-variant text-sm mt-3">For casual attendees looking to discover and purchase live event passes.</p>
+        </div>
+        <div class="h-px bg-white/10"></div>
+        <ul class="space-y-4">
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-[18px]">check</span><span class="text-sm text-on-surface-variant">Access to all public listings</span></li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-[18px]">check</span><span class="text-sm text-on-surface-variant">Instant digital barcodes</span></li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-[18px]">check</span><span class="text-sm text-on-surface-variant">Standard customer support</span></li>
+        </ul>
+      </div>
+      <a href="/register" class="w-full mt-8 py-3 rounded-full border border-white/10 bg-white/5 text-white font-bold text-center text-xs hover:bg-white/10 transition-all block">Get Started</a>
+    </div>
+
+    <!-- Premium plan -->
+    <div class="glass-panel rounded-3xl p-8 flex flex-col justify-between relative border-primary/50 bg-primary/5 reveal active liquid-hover">
+      <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary text-white font-extrabold text-[9px] tracking-widest px-4 py-1 rounded-full uppercase">Most Popular</div>
+      <div class="space-y-6">
+        <div>
+          <span class="font-label-sm text-xs tracking-wider text-primary uppercase">Premium Member</span>
+          <h2 class="text-3xl font-extrabold text-white mt-2">$19.99<span class="text-sm font-normal text-on-surface-variant">/mo</span></h2>
+          <p class="text-on-surface-variant text-sm mt-3">For event lovers seeking early ticket access, zero checkout fees, and VIP entries.</p>
+        </div>
+        <div class="h-px bg-white/10"></div>
+        <ul class="space-y-4">
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-[18px]">check</span><span class="text-sm text-on-surface-variant">Pre-sale tickets access</span></li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-[18px]">check</span><span class="text-sm text-on-surface-variant">Zero booking/checkout fees</span></li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-[18px]">check</span><span class="text-sm text-on-surface-variant">Fast-pass entrance priority</span></li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-[18px]">check</span><span class="text-sm text-on-surface-variant">24/7 Premium Support</span></li>
+        </ul>
+      </div>
+      <a href="/register" class="w-full mt-8 py-3 rounded-full bg-white text-[#070b19] font-extrabold text-center text-xs hover:brightness-110 shadow-lg shadow-primary/20 transition-all block">Upgrade Now</a>
+    </div>
+
+    <!-- Organizer plan -->
+    <div class="glass-panel rounded-3xl p-8 flex flex-col justify-between reveal active liquid-hover">
+      <div class="space-y-6">
+        <div>
+          <span class="font-label-sm text-xs tracking-wider text-on-surface-variant uppercase">Organizer Plan</span>
+          <h2 class="text-3xl font-extrabold text-white mt-2">Custom / Pay-as-you-sell</h2>
+          <p class="text-on-surface-variant text-sm mt-3">For event founders, venue managers, and hosts looking to sell tickets.</p>
+        </div>
+        <div class="h-px bg-white/10"></div>
+        <ul class="space-y-4">
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-[18px]">check</span><span class="text-sm text-on-surface-variant">Flat 2.5% fee per ticket sold</span></li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-[18px]">check</span><span class="text-sm text-on-surface-variant">Direct payouts to bank account</span></li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-[18px]">check</span><span class="text-sm text-on-surface-variant">Scan app & API check-in tools</span></li>
+          <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-[18px]">check</span><span class="text-sm text-on-surface-variant">Advanced attendee analytics dashboard</span></li>
+        </ul>
+      </div>
+      <a href="/organizer" class="w-full mt-8 py-3 rounded-full border border-white/10 bg-white/5 text-white font-bold text-center text-xs hover:bg-white/10 transition-all block">Start Selling</a>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-background w-full py-16 border-t border-white/5 relative z-10">
+  <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto gap-8">
+    <div class="flex flex-col items-center md:items-start gap-2">
+      <a href="/home" class="block mb-2">
+        <img src="/logo.webp" alt="MYHitch Pass" width="130" height="130" class="w-[130px] h-auto object-contain select-none" style="filter: none;">
+      </a>
+      <span class="font-body-md text-sm text-on-surface-variant/60">© 2024 MYHitch Pass. All rights reserved.</span>
+    </div>
+    <nav class="flex flex-wrap justify-center gap-8">
+      <a href="/terms" class="font-label-md text-sm tracking-wide text-on-surface-variant hover:text-white transition-colors uppercase">Terms of Service</a>
+      <a href="/privacy" class="font-label-md text-sm tracking-wide text-on-surface-variant hover:text-white transition-colors uppercase">Privacy Policy</a>
+      <a href="/contact-us" class="font-label-md text-sm tracking-wide text-on-surface-variant hover:text-white transition-colors uppercase">Contact Support</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+<!-- Dropdown Toggle Script -->
+<script>
+(function() {
+  document.querySelectorAll('.relative.group > a').forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const menu = this.nextElementSibling;
+      if (menu && menu.classList.contains('nav-dropdown-menu')) {
+        const isShown = menu.classList.contains('show-dropdown');
+        document.querySelectorAll('.nav-dropdown-menu').forEach(m => m.classList.remove('show-dropdown'));
+        if (!isShown) {
+          menu.classList.add('show-dropdown');
+        }
+      }
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.nav-dropdown-menu').forEach(m => m.classList.remove('show-dropdown'));
+  });
+})();
+</script>
+</body>
+</html>

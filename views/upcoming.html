@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html class="" lang="en" style="background-color: #ffffff;">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MYHitch Pass | Live Events</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config={darkMode:"class",theme:{extend:{colors:{primary: "#3b82f6",secondary: "#3b82f6","electric-cyan": "#3b82f6",surface: "#070b19","surface-container": "#f0f9ff","on-surface": "#0f172a","on-surface-variant": "#334155",background: "#03050a","on-background": "#0f172a",error:"#ef4444","on-error":"#ffffff"},fontFamily:{"label-sm":["Geist"],"label-md":["Geist"],"display-lg":["Geist"],"body-md":["Inter"],"headline-md":["Geist"],"body-lg":["Inter"],"headline-lg":["Geist"]},spacing:{"max-width":"1280px","margin-mobile":"20px","margin-desktop":"48px"}}}}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+<style>
+html,body{background:#02040a}
+body{animation:fadeIn .4s ease;color:#e2e8f0;font-family: 'Inter', sans-serif}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.glass{background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.02)),rgba(7,11,25,.6);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 32px rgba(0,0,0,.4);position:relative;overflow:hidden}
+.glass::before{content:'';position:absolute;top:0;left:-150%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);transform:skewX(-25deg);transition:left .75s ease;pointer-events:none;z-index:1}
+.glass:hover::before{left:150%}
+.themed-card{transition:all .4s ease;box-shadow:0 0 40px -15px hsl(var(--tc)/.5)}
+.themed-card:hover{transform:scale(1.04);box-shadow:0 0 60px -15px hsl(var(--tc)/.7)}
+/* --- filter chips --- */
+.chip{background:rgba(7,11,25,.5);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.1);border-radius:9999px;padding:6px 16px;font-size:11px;font-weight:700;cursor:pointer;transition:all .18s ease;font-family: 'Geist', sans-serif;letter-spacing:.05em}
+.chip:hover{color:#fff;border-color:rgba(255,255,255,.2)}
+.chip.on{background:#0d1527;color:#fff;border-color:rgba(59,130,246,.55);box-shadow:0 0 14px rgba(59,130,246,.28)}
+/* featured toggle */
+.ftoggle{display:flex;align-items:center;gap:8px;background:rgba(7,11,25,.5);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px 20px;font-size:11px;font-weight:700;color:rgba(255,255,255,.7);cursor:pointer;transition:all .18s ease;white-space:nowrap;font-family: 'Geist', sans-serif;letter-spacing:.05em}
+.ftoggle:hover{color:#fff;border-color:rgba(59,130,246,.35)}
+.ftoggle.on{background:rgba(59,130,246,.15);border-color:#3b82f6;color:#fff;box-shadow:0 0 18px rgba(59,130,246,.3)}
+/* seats */
+.seat{transition:all .15s ease;cursor:pointer;border:2px solid transparent;border-radius:8px;font-weight:700;font-size:11px;padding:6px 0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.seat:hover{filter:brightness(1.15);transform:translateY(-2px)}
+.seat.picked{outline:3px solid #fff;outline-offset:2px;transform:scale(1.08);z-index:5}
+/* nav */
+.nav-pill{font-family: 'Geist', sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.55);text-transform:uppercase;padding:7px 18px;border-radius:9999px;text-decoration:none;transition:all .2s;position:relative;white-space:nowrap}
+.nav-pill:hover{color:#fff}
+.nav-pill.active{color:#3b82f6;background:rgba(59,130,246,.1)}
+.nav-pill.active::after{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:#3b82f6;border-radius:9999px;box-shadow:0 0 8px rgba(59,130,246,.8)}
+@media(max-width:639px){.nav-pill.active::after{top:auto;bottom:-2px}}
+.orb-1{animation:morph 12s ease-in-out infinite both alternate,float1 24s ease-in-out infinite;filter:blur(140px);opacity:.08}
+.orb-2{animation:morph 14s ease-in-out infinite both alternate,float2 28s ease-in-out infinite;filter:blur(140px);opacity:.06}
+.orb-3{animation:morph 16s ease-in-out infinite both alternate,float3 32s ease-in-out infinite,pulse3 10s ease-in-out infinite alternate;filter:blur(140px)}
+@keyframes float1{0%{transform:translate(0,0) scale(1)}33%{transform:translate(80px,-100px) scale(1.15)}66%{transform:translate(-50px,50px) scale(0.9)}100%{transform:translate(0,0) scale(1)}}
+@keyframes float2{0%{transform:translate(0,0) scale(1)}33%{transform:translate(-100px,60px) scale(0.85)}66%{transform:translate(50px,-90px) scale(1.1)}100%{transform:translate(0,0) scale(1)}}
+@keyframes float3{0%{transform:translate(0,0) scale(1)}50%{transform:translate(120px,90px) scale(1.2)}100%{transform:translate(0,0) scale(1)}}
+@keyframes pulse1 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.28; } }
+@keyframes pulse2 { 0%, 100% { opacity: 0.12; } 50% { opacity: 0.25; } }
+@keyframes pulse3 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.22; } }
+@keyframes morph{
+  0%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}
+  50%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%}
+  100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}
+}50%{transform:translate(-80px,60px)}}
+/* hide scrollbar */
+.noscroll::-webkit-scrollbar{display:none}.noscroll{-ms-overflow-style:none;scrollbar-width:none}
+/* modal */
+@keyframes popIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+
+.nav-item-lamp {
+  position: relative;
+  transition: all 0.3s ease;
+}
+.nav-item-lamp:hover {
+  color: #ffffff !important;
+}
+.nav-item-lamp.active-pill {
+  color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.12) !important;
+  border-radius: 9999px !important;
+}
+/* Premium Light Dropdown Menu style */
+.nav-dropdown-menu {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
+  border-radius: 1rem !important;
+  min-width: 180px !important;
+}
+.nav-dropdown-item {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-family: 'Geist', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  padding: 12px 20px !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+.nav-dropdown-item:last-child {
+  border-bottom: none !important;
+}
+.nav-dropdown-item:hover {
+  color: #3b82f6 !important;
+  background-color: rgba(59, 130, 246, 0.15) !important;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.4) !important;
+}
+
+/* HoverButton Pointer Trail & Glass Effects */
+.hover-trail-button {
+  position: relative;
+  isolate: isolate;
+  background: rgba(7, 10, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease, filter 0.3s ease;
+}
+.hover-trail-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 
+    inset 0 0 0 1px rgba(170, 202, 255, 0.25),
+    inset 0 0 16px 0 rgba(170, 202, 255, 0.12),
+    inset 0 -3px 12px 0 rgba(170, 202, 255, 0.18),
+    0 1px 3px 0 rgba(0, 0, 0, 0.5),
+    0 4px 12px 0 rgba(0, 0, 0, 0.45);
+  mix-blend-mode: multiply;
+  transition: transform 0.3s ease;
+}
+.hover-trail-button:active::before {
+  transform: scale(0.975);
+}
+.pointer-trail-circle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  filter: blur(12px);
+  -webkit-filter: blur(12px);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.app-header{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:none}
+
+.nav-dropdown-menu.show-dropdown {
+  display: flex !important;
+}
+
+
+/* ===== LIGHT MODE OVERRIDES ===== */
+html, body { background-color: #ffffff !important; color: #0f172a; }
+h1.text-white, h2.text-white, h3.text-white { color: #0f172a !important; }
+.glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,249,255,0.90) 100%) !important;
+  border: 1px solid rgba(59,130,246,0.18) !important;
+  box-shadow: 0 8px 32px 0 rgba(59,130,246,0.10), inset 0 1px 0 0 rgba(255,255,255,0.9) !important;
+}
+.glass-morphism {
+  background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(240,249,255,0.93) 100%) !important;
+  border: 1px solid rgba(59,130,246,0.18) !important;
+  box-shadow: 0 20px 50px rgba(59,130,246,0.12) !important;
+}
+.nav-item { color: rgba(15,23,42,0.65) !important; }
+.nav-item:hover { color: #1d4ed8 !important; }
+.nav-item.active { color: #3b82f6 !important; text-decoration-color: #3b82f6 !important; }
+.nav-item-lamp:hover { color: #1d4ed8 !important; }
+.nav-item-lamp.active, .nav-item-lamp.active-pill {
+  color: #3b82f6 !important;
+  background: rgba(59,130,246,0.10) !important;
+}
+.nav-dropdown-menu {
+  background: rgba(255,255,255,0.98) !important;
+  border: 1px solid rgba(59,130,246,0.15) !important;
+  box-shadow: 0 20px 40px rgba(59,130,246,0.12) !important;
+}
+.nav-dropdown-item { color: rgba(15,23,42,0.75) !important; border-bottom: 1px solid rgba(59,130,246,0.08) !important; }
+.nav-dropdown-item:hover { color: #3b82f6 !important; background-color: rgba(59,130,246,0.06) !important; text-shadow: none !important; }
+.hover-trail-button {
+  background: rgba(255,255,255,0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(59,130,246,0.15) !important;
+  color: #1e293b !important;
+}
+.hover-trail-button::before { box-shadow: inset 0 0 0 1px rgba(59,130,246,0.2) !important; mix-blend-mode: normal !important; }
+.animated-shiny-text {
+  background: linear-gradient(90deg, #1e293b 0%, #3b82f6 30%, #0f172a 50%, #3b82f6 70%, #1e293b 100%) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.text-stroke { -webkit-text-stroke: 1px #1e293b !important; color: transparent !important; }
+.app-header { background: rgba(255,255,255,0.85) !important; backdrop-filter: blur(12px) !important; border-bottom: 1px solid rgba(59,130,246,0.10) !important; }
+
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- Ambient Liquid Backdrop (Cobalt/Navy Gradient) -->
+<div class="fixed inset-0 z-[-2] pointer-events-none" style="background: linear-gradient(to bottom, #ffffff 0%, #f0f9ff 25%, #dbeafe 55%, #eff6ff 80%, #ffffff 100%);"></div>
+<div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+  <div class="absolute top-[20%] left-[-15%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-br from-blue-500/35 to-transparent orb-1 mix-blend-multiply"></div>
+  <div class="absolute bottom-[10%] right-[-15%] w-[70vw] h-[70vw] rounded-full bg-gradient-to-tr from-blue-400/30 to-transparent orb-2 mix-blend-multiply"></div>
+  <div class="absolute top-[50%] left-[30%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-blue-300/25 to-transparent orb-3 mix-blend-multiply"></div>
+</div>
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 app-header">
+  <nav class="flex items-center justify-between h-[60px] px-6 md:px-10 max-w-full">
+    <a href="/home" class="shrink-0 mr-6 flex items-center translate-y-[6px]">
+      <img src="/logo.webp" alt="MYHitch Pass" width="200" height="200" class="w-[170px] md:w-[200px] h-auto object-contain select-none" style="filter: none;">
+    </a>
+        <div class="shrink-0 flex items-center gap-3 relative z-30">
+      <!-- My Tickets Button -->
+      <a href="/tickets" class="hover-trail-button inline-flex items-center gap-2 text-white px-4 py-2.5 rounded-full font-bold text-xs shrink-0">
+        <span class="material-symbols-outlined text-[16px] text-primary">confirmation_number</span>
+        <span class="hidden 2xl:inline">My Tickets</span>
+        <span class="w-4 h-4 rounded-full bg-error text-white flex items-center justify-center text-[9px] font-extrabold ml-0.5">2</span>
+      </a>
+      <!-- Profile Link -->
+      <a href="/profile" class="hover-trail-button inline-flex items-center gap-2 text-white px-4 py-2.5 rounded-full font-bold text-xs shrink-0">
+        <span class="material-symbols-outlined text-[16px] text-primary">person</span>
+        <span class="hidden 2xl:inline font-label-md">PROFILE</span>
+      </a>
+      <!-- Notification Link -->
+      <a href="/home" class="hover-trail-button flex items-center justify-center w-10 h-10 rounded-full text-white shrink-0 relative">
+        <span class="material-symbols-outlined text-primary" style="font-size:20px">notifications</span>
+        <span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error animate-pulse"></span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- Floating Navigation Bar (positioned fixed, collapses dynamically to prevent overlap) -->
+<div class="fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-3 pointer-events-auto">
+  <div class="flex items-center gap-1 bg-white/95 border border-blue-100 backdrop-blur-xl p-1 rounded-full shadow-xl shadow-blue-100/60">
+    <a href="/home" class="nav-item-lamp  px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">home</span>
+      <span class="hidden lg:inline">HOME</span>
+    </a>
+    <!-- Events Dropdown -->
+    <div class="relative group shrink-0">
+      <a href="/upcoming" class="nav-item-lamp active-pill px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1 text-slate-700 hover:text-blue-600">
+        <span class="material-symbols-outlined text-[18px] lg:hidden">event</span>
+        <span class="hidden lg:inline">EVENTS</span>
+        <span class="text-[9px] opacity-70 ml-0.5">▼</span>
+      </a>
+      <div class="hidden group-hover:flex flex-col absolute bottom-full sm:top-full left-1/2 -translate-x-1/2 mb-2 sm:mb-0 sm:mt-2 z-50 nav-dropdown-menu">
+        <a href="/upcoming" class="nav-dropdown-item">Upcoming Events</a>
+        <a href="/explore" class="nav-dropdown-item">Categories</a>
+        <a href="/broadway" class="nav-dropdown-item">Broadway Tickets</a>
+      </div>
+    </div>
+    <a href="/pricing" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">payments</span>
+      <span class="hidden lg:inline">PRICING</span>
+    </a>
+    <a href="/servicers" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">room_service</span>
+      <span class="hidden lg:inline">SERVICERS</span>
+    </a>
+    <a href="/about-us" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">info</span>
+      <span class="hidden lg:inline">ABOUT US</span>
+    </a>
+    <!-- Organiser Dropdown -->
+    <div class="relative group shrink-0">
+      <a href="/organizer" class="nav-item-lamp  px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1 text-slate-700 hover:text-blue-600">
+        <span class="material-symbols-outlined text-[18px] lg:hidden">corporate_fare</span>
+        <span class="hidden lg:inline">ORGANISER</span>
+        <span class="text-[9px] opacity-70 ml-0.5">▼</span>
+      </a>
+      <div class="hidden group-hover:flex flex-col absolute bottom-full sm:top-full left-1/2 -translate-x-1/2 mb-2 sm:mb-0 sm:mt-2 z-50 nav-dropdown-menu">
+        <a href="/organizer" class="nav-dropdown-item">Dashboard</a>
+        <a href="/organizer" class="nav-dropdown-item">Create Event</a>
+        <a href="/organizer" class="nav-dropdown-item">Analytics</a>
+      </div>
+    </div>
+    <a href="/contact-us" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">mail</span>
+      <span class="hidden lg:inline">CONTACT US</span>
+    </a>
+  </div>
+</div>
+
+<main style="padding-top:90px;padding-bottom:100px;max-width:1280px;margin:0 auto;padding-left:20px;padding-right:20px">
+
+  <!-- Page header -->
+  <div class="glass" style="border-radius:28px;padding:40px 48px;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between">
+    <div style="max-width:560px">
+      <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:#60a5fa;padding:6px 14px;border-radius:9999px;font-size:10px;font-weight:700;letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:16px">
+        <span style="width:6px;height:6px;border-radius:50%;background:#3b82f6;animation:pulse 1.5s infinite"></span>CHRONOLOGICAL LINEUP
+      </span>
+      <h1 style="font-family: 'Geist', sans-serif;font-size:clamp(36px,5vw,52px);font-weight:800;color:#fff;line-height:1.05;letter-spacing:-.04em;margin-bottom:12px">
+        Upcoming <span style="background:linear-gradient(to right,#60a5fa,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Passes</span>
+      </h1>
+      <p style="color:rgba(255,255,255,.55);font-size:15px;line-height:1.7">Explore curated live concerts, sports events, theatre performances and tech summits. Guaranteed door entry.</p>
+    </div>
+    <div style="display:flex;gap:48px;align-items:center">
+      <div>
+        <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:4px">LIVE REGISTRIES</div>
+        <div id="stat-total" style="font-family: 'Geist', sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1">6</div>
+      </div>
+      <div style="border-left:1px solid rgba(255,255,255,.1);padding-left:48px">
+        <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:4px">FEATURED TIER</div>
+        <div id="stat-featured" style="font-family: 'Geist', sans-serif;font-size:52px;font-weight:800;background:linear-gradient(to right,#60a5fa,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">3</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="glass" style="border-radius:24px;padding:24px 28px;margin-bottom:24px">
+    <!-- Row 1: search + location + featured -->
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+      <!-- Search -->
+      <div style="position:relative;flex:1;min-width:220px">
+        <span class="material-symbols-outlined" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.35);font-size:18px;pointer-events:none">search</span>
+        <input id="srch" type="text" placeholder="Search events, cities, artists..."
+          oninput="gSearch=this.value;doFilter()"
+          style="width:100%;background:rgba(7,11,25,.6);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 14px 12px 44px;font-size:13px;color:#fff;outline:none;font-family: 'Inter', sans-serif;box-sizing:border-box"
+          onfocus="this.style.borderColor='rgba(59,130,246,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+      </div>
+      <!-- Location -->
+      <div style="position:relative;min-width:200px">
+        <span class="material-symbols-outlined" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#3b82f6;font-size:18px;pointer-events:none">location_on</span>
+        <select id="loc" onchange="gLocation=this.value;doFilter()"
+          style="width:100%;appearance:none;background:rgba(7,11,25,.6);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 40px 12px 44px;font-size:13px;color:#fff;outline:none;font-family: 'Inter', sans-serif;cursor:pointer">
+          <option value="All">All Locations</option>
+          <option value="San Francisco">San Francisco</option>
+          <option value="Boston">Boston</option>
+          <option value="Chicago">Chicago</option>
+          <option value="New York">New York</option>
+          <option value="Los Angeles">Los Angeles</option>
+        </select>
+        <span class="material-symbols-outlined" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.35);font-size:18px;pointer-events:none">expand_more</span>
+      </div>
+      <!-- Featured toggle -->
+      <button id="ftbtn" class="ftoggle" onclick="toggleFeatured()">
+        <span class="material-symbols-outlined" style="font-size:16px;color:#3b82f6">auto_awesome</span>
+        FEATURED PASSES ONLY
+      </button>
+    </div>
+    <!-- Row 2: category chips -->
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;border-top:1px solid rgba(255,255,255,.06);padding-top:18px">
+      <span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-right:4px">CATEGORY:</span>
+      <button id="chip-ALL"       class="chip on"  onclick="filterCat('ALL')">ALL</button>
+      <button id="chip-CONCERTS"  class="chip"     onclick="filterCat('CONCERTS')">CONCERTS</button>
+      <button id="chip-FESTIVALS" class="chip"     onclick="filterCat('FESTIVALS')">FESTIVALS</button>
+      <button id="chip-SPORTS"    class="chip"     onclick="filterCat('SPORTS')">SPORTS</button>
+      <button id="chip-THEATRE"   class="chip"     onclick="filterCat('THEATRE')">THEATRE &amp; ARTS</button>
+      <button id="chip-COMMUNITY" class="chip"     onclick="filterCat('COMMUNITY')">COMMUNITY &amp; TECH</button>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div id="grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px"></div>
+
+</main>
+
+<!-- Booking Modal -->
+<div id="modal" onclick="if(event.target===this)closeModal()" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);padding:16px;overflow-y:auto;align-items:center;justify-content:center">
+  <div id="mbox" style="background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(7,11,25,.9));border:1px solid rgba(255,255,255,.12);border-radius:20px;width:100%;max-width:620px;margin:auto;overflow:hidden;animation:popIn .3s ease">
+    <!-- Modal header -->
+    <div style="padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.15)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="material-symbols-outlined" style="color:#3b82f6;font-size:20px">shield</span>
+        <div>
+          <div style="font-size:9px;font-weight:700;color:#3b82f6;letter-spacing:.12em;font-family: 'Geist', sans-serif">SECURE CHECKOUT</div>
+          <div style="font-size:16px;font-weight:800;color:#fff;font-family: 'Geist', sans-serif;letter-spacing:-.02em">GET YOUR TICKET</div>
+        </div>
+      </div>
+      <button onclick="closeModal()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.6)">
+        <span class="material-symbols-outlined" style="font-size:16px">close</span>
+      </button>
+    </div>
+    <!-- Step 1 body -->
+    <div id="s1body" style="padding:16px 20px">
+      <div style="display:flex;flex-wrap:wrap;gap:16px">
+        <!-- Left Col: Seating -->
+        <div style="flex:1.2;min-width:260px">
+          <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:8px">1. CHOOSE SEATING TIER</div>
+          <div style="background:rgba(7,11,25,.6);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px;margin-bottom:10px">
+            <div style="text-align:center;background:#131e38;border:1px solid rgba(255,255,255,.05);border-radius:8px;padding:6px;font-size:10px;font-weight:700;color:#fff;letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:12px">
+              <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#3b82f6;margin-right:6px;animation:pulse 1.5s infinite"></span>CONCERT STAGE / ARENA FRONT
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+              <button id="seat-A1" data-p="140" class="seat" style="background:#7c3aed;color:#fff" onclick="pickSeat('A1')">A1<span style="font-size:8px;opacity:.7;display:block">VIP</span></button>
+              <button id="seat-A2" data-p="140" class="seat" style="background:#7c3aed;color:#fff" onclick="pickSeat('A2')">A2<span style="font-size:8px;opacity:.7;display:block">VIP</span></button>
+              <button id="seat-A3" data-p="140" class="seat" style="background:#7c3aed;color:#fff" onclick="pickSeat('A3')">A3<span style="font-size:8px;opacity:.7;display:block">VIP</span></button>
+              <button id="seat-A4" data-p="140" class="seat" style="background:#7c3aed;color:#fff" onclick="pickSeat('A4')">A4<span style="font-size:8px;opacity:.7;display:block">VIP</span></button>
+              <button id="seat-B1" data-p="110" class="seat" style="background:#0891b2;color:#fff" onclick="pickSeat('B1')">B1<span style="font-size:8px;opacity:.7;display:block">BAL</span></button>
+              <button id="seat-B2" data-p="110" class="seat" style="background:#0891b2;color:#fff" onclick="pickSeat('B2')">B2<span style="font-size:8px;opacity:.7;display:block">BAL</span></button>
+              <button id="seat-B3" data-p="110" class="seat" style="background:#0891b2;color:#fff" onclick="pickSeat('B3')">B3<span style="font-size:8px;opacity:.7;display:block">BAL</span></button>
+              <button id="seat-B4" data-p="110" class="seat" style="background:#0891b2;color:#fff" onclick="pickSeat('B4')">B4<span style="font-size:8px;opacity:.7;display:block">BAL</span></button>
+              <button id="seat-C1" data-p="85"  class="seat" style="background:#475569;color:#fff" onclick="pickSeat('C1')">C1<span style="font-size:8px;opacity:.7;display:block">GEN</span></button>
+              <button id="seat-C2" data-p="85"  class="seat" style="background:#475569;color:#fff" onclick="pickSeat('C2')">C2<span style="font-size:8px;opacity:.7;display:block">GEN</span></button>
+              <button id="seat-C3" data-p="85"  class="seat" style="background:#475569;color:#fff" onclick="pickSeat('C3')">C3<span style="font-size:8px;opacity:.7;display:block">GEN</span></button>
+              <button id="seat-C4" data-p="85"  class="seat" style="background:#475569;color:#fff" onclick="pickSeat('C4')">C4<span style="font-size:8px;opacity:.7;display:block">GEN</span></button>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;border-top:1px solid rgba(255,255,255,.06);padding-top:8px;font-size:9px;font-weight:700;color:rgba(255,255,255,.5);font-family: 'Geist', sans-serif">
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#7c3aed"></span><span id="lg-vip">VIP Stage</span></span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#0891b2"></span><span id="lg-bal">Balcony</span></span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#475569"></span><span id="lg-std">Stands</span></span>
+            </div>
+          </div>
+          <div style="background:rgba(7,11,25,.4);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:10px;color:rgba(255,255,255,.45)">Assigned Seat:</span>
+            <span id="seat-disp" style="font-size:10px;font-weight:700;color:#22d3ee;font-family: 'Geist', sans-serif">Select a seat above</span>
+          </div>
+        </div>
+        <!-- Right Col: Qty & Details -->
+        <div style="flex:1;min-width:220px;display:flex;flex-direction:column;gap:12px">
+          <!-- Quantity -->
+          <div>
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:6px">2. TICKET QUANTITY</div>
+            <div style="background:rgba(7,11,25,.5);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:11px;color:rgba(255,255,255,.7)">Total attendees</span>
+              <div style="display:flex;align-items:center;gap:8px;background:#131e38;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:2px">
+                <button onclick="adjQty(-1)" style="width:26px;height:26px;border-radius:6px;background:rgba(255,255,255,.06);color:#fff;font-size:14px;font-weight:700;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center">-</button>
+                <span id="qty-disp" style="font-size:12px;font-weight:800;color:#fff;font-family: 'Geist', sans-serif;min-width:16px;text-align:center">1</span>
+                <button onclick="adjQty(1)"  style="width:26px;height:26px;border-radius:6px;background:rgba(255,255,255,.06);color:#fff;font-size:14px;font-weight:700;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center">+</button>
+              </div>
+            </div>
+          </div>
+          <!-- Customer info -->
+          <div>
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:6px">3. CUSTOMER DETAILS</div>
+            <div style="position:relative;margin-bottom:8px">
+              <span class="material-symbols-outlined" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.35);font-size:16px">person</span>
+              <input id="bname" type="text" placeholder="YOUR NAME" value="Sarah Jenkins"
+                style="width:100%;background:rgba(7,11,25,.6);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 10px 8px 32px;font-size:11px;font-weight:700;color:#fff;font-family: 'Geist', sans-serif;letter-spacing:.05em;outline:none;box-sizing:border-box"
+                onfocus="this.style.borderColor='rgba(59,130,246,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+            </div>
+            <div style="position:relative">
+              <span class="material-symbols-outlined" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.35);font-size:16px">mail</span>
+              <input id="bemail" type="email" placeholder="EMAIL" value="sarahj@example.com"
+                style="width:100%;background:rgba(7,11,25,.6);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 10px 8px 32px;font-size:11px;font-weight:700;color:#fff;font-family: 'Geist', sans-serif;letter-spacing:.05em;outline:none;box-sizing:border-box"
+                onfocus="this.style.borderColor='rgba(59,130,246,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Step 1 footer -->
+    <div id="s1foot" style="padding:12px 20px;background:rgba(0,0,0,.2);border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em;font-family: 'Geist', sans-serif">BILLING SUMMARY</div>
+        <div id="bill-total" style="font-size:24px;font-weight:800;background:linear-gradient(to right,#60a5fa,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family: 'Geist', sans-serif">$85</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button onclick="saveDraft()" style="padding:8px 14px;border-radius:10px;border:1px solid rgba(234,179,8,.3);color:#eab308;font-size:10px;font-weight:700;cursor:pointer;font-family: 'Geist', sans-serif;background:transparent">SAVE DRAFT</button>
+        <button onclick="goStep2()" style="display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;background:linear-gradient(to right,#3b82f6,#06b6d4);color:#fff;font-size:10px;font-weight:700;cursor:pointer;font-family: 'Geist', sans-serif;border:none;box-shadow:0 4px 14px rgba(59,130,246,.3)">
+          SETTLE PURCHASE <span class="material-symbols-outlined" style="font-size:12px">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+    <!-- Step 2 body -->
+    <div id="s2body" style="display:none;padding:16px 20px">
+      <div style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div>
+          <div style="font-size:9px;font-weight:700;color:#22d3ee;letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:2px">TOTAL TO PAY</div>
+          <div id="s2total" style="font-size:26px;font-weight:800;color:#fff;font-family: 'Geist', sans-serif">$85</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:9px;font-weight:700;color:#22d3ee;letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:2px">NAME</div>
+          <div id="s2name" style="font-size:13px;font-weight:700;color:#fff">Sarah Jenkins</div>
+        </div>
+      </div>
+      <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:6px">CARD NUMBER</div>
+      <div style="position:relative;margin-bottom:10px">
+        <span class="material-symbols-outlined" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.35);font-size:16px">credit_card</span>
+        <input id="cnum" type="text" placeholder="4242 4242 4242 4242"
+          style="width:100%;background:rgba(7,11,25,.6);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 10px 8px 32px;font-size:12px;color:#fff;outline:none;font-family: 'Inter', sans-serif;box-sizing:border-box"
+          onfocus="this.style.borderColor='rgba(59,130,246,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:4px">EXPIRES</div>
+          <input id="cexp" type="text" placeholder="MM/YY"
+            style="width:100%;background:rgba(7,11,25,.6);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px;font-size:12px;color:#fff;outline:none;font-family: 'Inter', sans-serif;box-sizing:border-box"
+            onfocus="this.style.borderColor='rgba(59,130,246,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.1em;font-family: 'Geist', sans-serif;margin-bottom:4px">CVV</div>
+          <input id="ccvv" type="password" placeholder="***"
+            style="width:100%;background:rgba(7,11,25,.6);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px;font-size:12px;color:#fff;outline:none;font-family: 'Inter', sans-serif;box-sizing:border-box"
+            onfocus="this.style.borderColor='rgba(59,130,246,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:8px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:10px 12px;color:#6ee7b7;font-size:10px;line-height:1.5">
+        <span class="material-symbols-outlined" style="font-size:16px;flex-shrink:0">gpp_good</span>
+        Your card is safe. Payments are processed by Stripe.
+      </div>
+    </div>
+    <!-- Step 2 footer -->
+    <div id="s2foot" style="display:none;padding:12px 20px;background:rgba(0,0,0,.2);border-top:1px solid rgba(255,255,255,.08);gap:10px">
+      <button onclick="goStep1()" style="flex:1;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:10px;font-weight:700;cursor:pointer;font-family: 'Geist', sans-serif;background:transparent">GO BACK</button>
+      <button onclick="settle()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;border-radius:10px;background:linear-gradient(to right,#3b82f6,#06b6d4);color:#fff;font-size:10px;font-weight:700;cursor:pointer;font-family: 'Geist', sans-serif;border:none">
+        <span class="material-symbols-outlined" style="font-size:12px">shield</span>
+        <span id="pay-txt">PAY NOW</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+// Category keys are simple ALL-CAPS strings with NO special characters
+// catKey maps to display labels and event category strings
+var CAT_MAP = {
+  ALL:       null,
+  CONCERTS:  'Concerts',
+  FESTIVALS: 'Festivals',
+  SPORTS:    'Sports',
+  THEATRE:   'Theatre and Arts',
+  COMMUNITY: 'Community and Tech'
+};
+
+var EVENTS = [
+  { id:1, cat:'FESTIVALS',  name:'Neon Horizon Music Festival',        loc:'San Francisco', price:89,  alloc:74, hot:true,  img:'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=600', mon:'Jul', day:'12', tc:'200 100% 50%', perks:['Access to 3 unique stages','Top-tier international DJ lineup'] },
+  { id:2, cat:'CONCERTS',   name:'Acoustic Sessions: Live and Intimate', loc:'Boston',       price:45,  alloc:78, hot:true,  img:'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80', mon:'Jun', day:'20', tc:'270 100% 60%', perks:['Award-winning singer-songwriter performances','Complimentary wine tasting on arrival'] },
+  { id:3, cat:'SPORTS',     name:'Championship Bowl 2026',              loc:'Chicago',       price:65,  alloc:82, hot:true,  img:'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80', mon:'Aug', day:'02', tc:'0 100% 60%',   perks:['Unrivaled stadium atmosphere with 12k+ fans','Giant screen replay coverage'] },
+  { id:4, cat:'THEATRE',    name:'Metropolis: The Immersive Stage Play', loc:'New York',     price:75,  alloc:75, hot:false, img:'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=800&q=80', mon:'Jul', day:'05', tc:'330 100% 60%', perks:['Multi-sensory surround sound audio','Full-room augmented projection loops'] },
+  { id:5, cat:'COMMUNITY',  name:'Tech Founders and Builders Summit',   loc:'San Francisco', price:120, alloc:84, hot:false, img:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80', mon:'Jun', day:'15', tc:'180 100% 50%', perks:['Keynote sessions from elite founders','Interactive roundtable workshops'] },
+  { id:6, cat:'CONCERTS',   name:'Sunsets and Symphony: Classical Remix', loc:'Los Angeles', price:55,  alloc:48, hot:false, img:'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=800&q=80', mon:'Aug', day:'18', tc:'220 100% 60%', perks:['Ocean cliffside amphitheater view','Remixed orchestral scores by modern synthesizers'] }
+];
+
+// ─── FILTER STATE ─────────────────────────────────────────────────────────────
+var gCat      = 'ALL';
+var gFeatured = false;
+var gSearch   = '';
+var gLocation = 'All';
+
+// ─── FILTER FUNCTIONS ─────────────────────────────────────────────────────────
+function filterCat(key) {
+  gCat = key;
+  // Update chip active states
+  var keys = ['ALL','CONCERTS','FESTIVALS','SPORTS','THEATRE','COMMUNITY'];
+  for (var i = 0; i < keys.length; i++) {
+    var el = document.getElementById('chip-' + keys[i]);
+    if (el) {
+      if (keys[i] === key) el.classList.add('on');
+      else el.classList.remove('on');
+    }
+  }
+  doFilter();
+}
+
+function toggleFeatured() {
+  gFeatured = !gFeatured;
+  var btn = document.getElementById('ftbtn');
+  if (gFeatured) btn.classList.add('on');
+  else btn.classList.remove('on');
+  doFilter();
+}
+
+function doFilter() {
+  var q = gSearch.toLowerCase().trim();
+  var result = [];
+  for (var i = 0; i < EVENTS.length; i++) {
+    var e = EVENTS[i];
+    if (gCat !== 'ALL' && e.cat !== gCat) continue;
+    if (gFeatured && !e.hot) continue;
+    if (gLocation !== 'All' && e.loc !== gLocation) continue;
+    if (q && e.name.toLowerCase().indexOf(q) === -1 && e.loc.toLowerCase().indexOf(q) === -1) continue;
+    result.push(e);
+  }
+  renderGrid(result);
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function renderGrid(list) {
+  var grid = document.getElementById('grid');
+  if (!grid) return;
+  if (list.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;padding:80px 20px;text-align:center"><span class="material-symbols-outlined" style="font-size:56px;color:rgba(255,255,255,.15);display:block;margin-bottom:16px">search_off</span><p style="color:rgba(255,255,255,.5);font-size:15px;margin-bottom:20px">No passes match your filters.</p><button onclick="resetAll()" style="padding:10px 24px;border-radius:9999px;border:1px solid rgba(59,130,246,.3);color:#60a5fa;font-size:12px;font-weight:700;cursor:pointer;background:transparent;font-family:'Geist',sans-serif">Reset Filters</button></div>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < list.length; i++) {
+    var e = list[i];
+    var badge = e.hot ? '<div style="position:absolute;top:14px;right:14px;z-index:5;background:#3b82f6;color:#fff;padding:5px 12px;border-radius:9999px;font-size:9px;font-weight:800;letter-spacing:.1em;font-family:'Geist',sans-serif;display:flex;align-items:center;gap:5px"><span class="material-symbols-outlined" style="font-size:11px">auto_awesome</span>PREMIUM PASS</div>' : '';
+    var perks = '';
+    for (var p = 0; p < e.perks.length; p++) {
+      perks += '<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span class="material-symbols-outlined" style="font-size:13px;color:#22d3ee;flex-shrink:0;margin-top:1px">check</span><span style="font-size:11px;color:rgba(255,255,255,.75);line-height:1.5">' + e.perks[p] + '</span></div>';
+    }
+    // Category display label
+    var catLabel = CAT_MAP[e.cat] || e.cat;
+    html += '<div onclick="window.location.href=\'/event-details?id=\' + e.id" style="cursor:pointer;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(7,11,25,.7));border:1px solid rgba(255,255,255,.09);box-shadow:0 0 40px -15px hsl(' + e.tc + '/.4);transition:all .4s ease;position:relative" onmouseover="this.style.transform=\'scale(1.03)\';this.style.boxShadow=\'0 0 60px -10px hsl(' + e.tc + '/.65)\'" onmouseout="this.style.transform=\'scale(1)\';this.style.boxShadow=\'0 0 40px -15px hsl(' + e.tc + '/.4)\'">';
+    html += '<div style="position:relative;height:210px;overflow:hidden;flex-shrink:0">';
+    html += '<img src="' + e.img + '" alt="' + e.name + '" style="width:100%;height:100%;object-fit:cover;transition:transform .7s ease" onmouseover="this.style.transform=\'scale(1.08)\'" onmouseout="this.style.transform=\'scale(1)\'">';
+    html += '<div style="position:absolute;top:14px;left:14px;z-index:5;background:#fff;color:#070b19;width:46px;height:46px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.3)"><span style="font-size:8px;font-weight:800;color:#3b82f6;text-transform:uppercase;letter-spacing:.05em;line-height:1;font-family:'Geist',sans-serif">' + e.mon + '</span><span style="font-size:17px;font-weight:800;line-height:1.1;font-family:'Geist',sans-serif">' + e.day + '</span></div>';
+    html += badge;
+    html += '<div style="position:absolute;bottom:12px;left:12px;z-index:5;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);color:rgba(255,255,255,.9);padding:4px 12px;border-radius:9999px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'Geist',sans-serif">' + catLabel + '</div>';
+    html += '<div style="position:absolute;bottom:12px;right:12px;z-index:5;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);color:rgba(255,255,255,.9);padding:4px 12px;border-radius:9999px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'Geist',sans-serif;display:flex;align-items:center;gap:4px"><span class="material-symbols-outlined" style="font-size:10px">location_on</span>' + e.loc + '</div>';
+    html += '</div>';
+    html += '<div style="padding:22px;display:flex;flex-direction:column;flex:1;gap:16px">';
+    html += '<div><h3 style="font-family:'Geist',sans-serif;font-size:17px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:6px">' + e.name + '</h3><p style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.6">Experience the ultimate live event. Premium seating and exclusive perks guaranteed.</p></div>';
+    html += '<div style="background:rgba(7,11,25,.5);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px">';
+    html += '<div style="font-size:9px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.1em;font-family:'Geist',sans-serif;margin-bottom:10px">EXCLUSIVE PERKS INCLUDED:</div>' + perks;
+    html += '</div>';
+    html += '<div><div style="display:flex;justify-content:space-between;font-size:9px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.08em;font-family:'Geist',sans-serif;margin-bottom:6px"><span>ADMISSION MATRIX</span><span style="color:#22d3ee">' + e.alloc + '% FILLED</span></div><div style="height:6px;background:rgba(255,255,255,.08);border-radius:9999px;overflow:hidden"><div style="height:100%;width:' + e.alloc + '%;background:linear-gradient(to right,#3b82f6,#22d3ee);border-radius:9999px"></div></div></div>';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(255,255,255,.06)">';
+    html += '<div><div style="font-size:9px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.1em;font-family:'Geist',sans-serif">STARTING FROM</div><div style="font-size:28px;font-weight:800;color:#fff;font-family:'Geist',sans-serif">$' + e.price + '</div></div>';
+    html += '<button onclick="event.stopPropagation();openModal(' + e.id + ')" style="display:flex;align-items:center;gap:7px;padding:11px 20px;border-radius:12px;background:linear-gradient(to right,#3b82f6,#06b6d4);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'Geist',sans-serif;border:none;box-shadow:0 4px 14px rgba(59,130,246,.3)"><span class="material-symbols-outlined" style="font-size:14px">confirmation_number</span>INSTANT BOOKING</button>';
+    html += '</div></div></div>';
+  }
+  grid.innerHTML = html;
+}
+
+function resetAll() {
+  gCat='ALL'; gFeatured=false; gSearch=''; gLocation='All';
+  document.getElementById('srch').value='';
+  document.getElementById('loc').value='All';
+  document.getElementById('ftbtn').classList.remove('on');
+  filterCat('ALL');
+}
+
+// ─── MODAL ────────────────────────────────────────────────────────────────────
+var mEvent=null, mSeat='C1', mQty=1;
+
+function openModal(id) {
+  for(var i=0;i<EVENTS.length;i++){if(EVENTS[i].id===id){mEvent=EVENTS[i];break;}}
+  if(!mEvent) return;
+  mSeat='C1'; mQty=1;
+
+  var vip=Math.round(mEvent.price*1.57), bal=Math.round(mEvent.price*1.24), std=mEvent.price;
+  document.getElementById('lg-vip').innerText='VIP Stage ($'+vip+'+)';
+  document.getElementById('lg-bal').innerText='Balcony ($'+bal+')';
+  document.getElementById('lg-std').innerText='Stands ($'+std+')';
+
+  var rows=['A','B','C'], prices=[vip,bal,std];
+  for(var r=0;r<rows.length;r++){
+    for(var n=1;n<=4;n++){
+      var sb=document.getElementById('seat-'+rows[r]+n);
+      if(sb){sb.setAttribute('data-p',prices[r]);}
+    }
+  }
+  pickSeat('C1');
+  document.getElementById('qty-disp').innerText='1';
+  document.getElementById('bill-total').innerText='$'+std;
+  document.getElementById('s1body').style.display='block';
+  document.getElementById('s1foot').style.display='flex';
+  document.getElementById('s2body').style.display='none';
+  document.getElementById('s2foot').style.display='none';
+  document.getElementById('modal').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('modal').style.display='none';
+  document.body.style.overflow='';
+}
+
+function pickSeat(code){
+  mSeat=code;
+  var all=document.querySelectorAll('.seat');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('picked');
+  var sb=document.getElementById('seat-'+code);
+  if(sb) sb.classList.add('picked');
+  var r=code.charAt(0);
+  document.getElementById('seat-disp').innerText=code+(r==='A'?' — VIP Stage':r==='B'?' — Balcony':' — General Admission');
+  calcBill();
+}
+
+function calcBill(){
+  if(!mEvent) return;
+  var sb=document.getElementById('seat-'+mSeat);
+  var price=sb?parseInt(sb.getAttribute('data-p')||mEvent.price):mEvent.price;
+  document.getElementById('bill-total').innerText='$'+(price*mQty);
+}
+
+function adjQty(d){
+  mQty=Math.max(1,Math.min(10,mQty+d));
+  document.getElementById('qty-disp').innerText=mQty;
+  calcBill();
+}
+
+function goStep2(){
+  var n=document.getElementById('bname').value, em=document.getElementById('bemail').value;
+  if(!n||!em){alert('Please fill in your name and email.');return;}
+  var sb=document.getElementById('seat-'+mSeat);
+  var price=sb?parseInt(sb.getAttribute('data-p')||mEvent.price):mEvent.price;
+  var total=price*mQty;
+  document.getElementById('s2total').innerText='$'+total;
+  document.getElementById('s2name').innerText=n;
+  document.getElementById('pay-txt').innerText='PAY $'+total+' NOW';
+  document.getElementById('s1body').style.display='none';
+  document.getElementById('s1foot').style.display='none';
+  document.getElementById('s2body').style.display='block';
+  document.getElementById('s2foot').style.display='flex';
+}
+
+function goStep1(){
+  document.getElementById('s2body').style.display='none';
+  document.getElementById('s2foot').style.display='none';
+  document.getElementById('s1body').style.display='block';
+  document.getElementById('s1foot').style.display='flex';
+}
+
+function saveDraft(){
+  var n=document.getElementById('bname').value, em=document.getElementById('bemail').value;
+  if(!n||!em){alert('Please fill in your name and email.');return;}
+  alert('Draft Saved!\nEvent: '+mEvent.name+'\nSeat: '+mSeat+'\nQty: '+mQty+'\nName: '+n);
+}
+
+function settle(){
+  var c=document.getElementById('cnum').value, ex=document.getElementById('cexp').value, cv=document.getElementById('ccvv').value;
+  if(!c||!ex||!cv){alert('Please fill in all card details.');return;}
+  var em=document.getElementById('bemail').value;
+  alert('Ticket Purchased!\nConfirmation sent to '+em+'.\nThank you for choosing MYHitch Pass!');
+  closeModal();
+  window.location.href='/tickets';
+}
+
+// ─── BOOT ─────────────────────────────────────────────────────────────────────
+var urlParams = new URLSearchParams(window.location.search);
+var searchParam = urlParams.get('search');
+var locationParam = urlParams.get('location');
+var categoryParam = urlParams.get('category');
+
+if (searchParam) {
+  gSearch = searchParam;
+  var srchInput = document.getElementById('srch');
+  if (srchInput) srchInput.value = searchParam;
+}
+if (locationParam) {
+  var locSelect = document.getElementById('loc');
+  if (locSelect) {
+    var found = false;
+    for (var i = 0; i < locSelect.options.length; i++) {
+      if (locSelect.options[i].value.toLowerCase() === locationParam.toLowerCase()) {
+        locSelect.selectedIndex = i;
+        gLocation = locSelect.options[i].value;
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      var opt = document.createElement('option');
+      opt.value = locationParam;
+      opt.text = locationParam;
+      locSelect.add(opt);
+      locSelect.value = locationParam;
+      gLocation = locationParam;
+    }
+  }
+}
+if (categoryParam) {
+  var p = categoryParam.toLowerCase();
+  if (p === 'concerts') gCat = 'CONCERTS';
+  else if (p === 'festivals') gCat = 'FESTIVALS';
+  else if (p === 'sports') gCat = 'SPORTS';
+  else if (p === 'theatre' || p === 'theatre & arts') gCat = 'THEATRE';
+  else if (p === 'tech' || p === 'community' || p === 'community & tech') gCat = 'COMMUNITY';
+}
+
+if (gCat !== 'ALL') {
+  filterCat(gCat);
+} else {
+  doFilter();
+}
+
+// Auto-open booking modal if book parameter is present
+var bookParam = urlParams.get('book');
+if (bookParam) {
+  var bId = parseInt(bookParam);
+  if (!isNaN(bId)) {
+    setTimeout(function() {
+      openModal(bId);
+    }, 100);
+  }
+}
+</script>
+<script>
+(function() {
+  // Pointer trail circles logic for HoverButton
+  document.querySelectorAll('.hover-trail-button').forEach(button => {
+    let isListening = false;
+    let lastAdded = 0;
+
+    button.addEventListener('pointerenter', () => {
+      isListening = true;
+    });
+
+    button.addEventListener('pointerleave', () => {
+      isListening = false;
+    });
+
+    button.addEventListener('pointermove', (e) => {
+      if (!isListening) return;
+      const now = Date.now();
+      if (now - lastAdded > 100) {
+        lastAdded = now;
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const circle = document.createElement('div');
+        circle.className = 'pointer-trail-circle';
+        circle.style.left = x + 'px';
+        circle.style.top = y + 'px';
+        
+        const xPos = x / rect.width;
+        circle.style.background = 'linear-gradient(to right, #a0d9f8 ' + (xPos * 100) + '%, #3a5bbf ' + (xPos * 100) + '%)';
+
+        button.appendChild(circle);
+
+        setTimeout(() => {
+          circle.style.opacity = '0.75';
+        }, 50);
+
+        setTimeout(() => {
+          circle.style.opacity = '0';
+          circle.style.transition = 'opacity 1.2s ease';
+        }, 1000);
+
+        setTimeout(() => {
+          circle.remove();
+        }, 2200);
+      }
+    });
+  });
+})();
+</script>
+
+<!-- Dropdown Toggle Script -->
+<script>
+(function() {
+  document.querySelectorAll('.relative.group > a').forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const menu = this.nextElementSibling;
+      if (menu && menu.classList.contains('nav-dropdown-menu')) {
+        const isShown = menu.classList.contains('show-dropdown');
+        document.querySelectorAll('.nav-dropdown-menu').forEach(m => m.classList.remove('show-dropdown'));
+        if (!isShown) {
+          menu.classList.add('show-dropdown');
+        }
+      }
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.nav-dropdown-menu').forEach(m => m.classList.remove('show-dropdown'));
+  });
+})();
+</script>
+</body>
+</html>

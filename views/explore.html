@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html class="" lang="en" style="background-color: #ffffff;">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYHitch Pass | Event Explorer</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary": "#3b82f6","secondary": "#3b82f6","electric-cyan": "#3b82f6","surface": "#ffffff","surface-container": "#f0f9ff","surface-container-high": "#e0f2fe","surface-container-highest": "#bae6fd","on-surface": "#0f172a","on-surface-variant": "#334155","background": "#f8fafc","on-background": "#0f172a","error":"#ef4444","error-container":"#7f1d1d","on-error":"#ffffff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"max-width":"1280px","margin-mobile":"20px","margin-desktop":"48px",gutter:"16px",base:"8px"},fontFamily:{"label-sm":["Geist"],"label-md":["Geist"],"display-lg":["Geist"],"body-md":["Inter"],"display-lg-mobile":["Geist"],"headline-md":["Geist"],"body-lg":["Inter"],"headline-lg":["Geist"]},fontSize:{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.05em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.04em","fontWeight":"800"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"display-lg-mobile":["32px",{"lineHeight":"38px","letterSpacing":"-0.03em","fontWeight":"800"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-lg":["30px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+<style>
+.themed-card {
+  transition: all 500ms ease-in-out !important;
+  box-shadow: 0 0 40px -15px hsl(var(--theme-color) / 0.5) !important;
+}
+.themed-card:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 0 60px -15px hsl(var(--theme-color) / 0.6) !important;
+}
+
+html {
+  background-color: #ffffff;
+}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+.glass-panel{background:linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%), rgba(7,11,25,0.55);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.15), inset 0 -1px 0 0 rgba(255,255,255,0.05);position:relative;overflow:hidden}
+.glass-panel::before{content:'';position:absolute;top:0;left:-150%;width:50%;height:100%;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.08) 50%,rgba(255,255,255,0) 100%);transform:skewX(-25deg);transition:left 0.75s ease-in-out;pointer-events:none;z-index:1}
+.glass-panel:hover::before{left:150%}
+.reveal-card{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(0.22,1,0.36,1)}
+.reveal-card.active{opacity:1;transform:translateY(0)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#03050a}::-webkit-scrollbar-thumb{background:#131e38;border-radius:10px}::-webkit-scrollbar-thumb:hover{background:#3b82f6}
+body{animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.app-header{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:none}
+.nav-item{font-family: 'Geist', sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.58);text-decoration:none;transition:color .2s;text-transform:uppercase;flex-shrink:0;text-align:center;line-height:1.3}
+.nav-item:hover{color:#fff}
+.nav-item.active{color:#fff;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px;text-decoration-color:#3b82f6}
+.nav-scroll::-webkit-scrollbar{display:none}
+.orb-1{animation:morph 12s ease-in-out infinite both alternate,float1 24s ease-in-out infinite;filter:blur(140px);opacity:.08}
+.orb-2{animation:morph 14s ease-in-out infinite both alternate,float2 28s ease-in-out infinite;filter:blur(140px);opacity:.06}
+.orb-3{animation:morph 16s ease-in-out infinite both alternate,float3 32s ease-in-out infinite,pulse3 10s ease-in-out infinite alternate;filter:blur(140px)}
+@keyframes float1{0%{transform:translate(0,0) scale(1)}33%{transform:translate(80px,-100px) scale(1.15)}66%{transform:translate(-50px,50px) scale(0.9)}100%{transform:translate(0,0) scale(1)}}
+@keyframes float2{0%{transform:translate(0,0) scale(1)}33%{transform:translate(-100px,60px) scale(0.85)}66%{transform:translate(50px,-90px) scale(1.1)}100%{transform:translate(0,0) scale(1)}}
+@keyframes float3{0%{transform:translate(0,0) scale(1)}50%{transform:translate(120px,90px) scale(1.2)}100%{transform:translate(0,0) scale(1)}}
+@keyframes pulse1 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.28; } }
+@keyframes pulse2 { 0%, 100% { opacity: 0.12; } 50% { opacity: 0.25; } }
+@keyframes pulse3 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.22; } }
+@keyframes morph{
+  0%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}
+  50%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%}
+  100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}
+}50%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%}100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}}
+
+/* Floating NavBar & Lamp effect */
+.nav-item-lamp {
+  position: relative;
+  transition: all 0.3s ease;
+}
+.nav-item-lamp:hover {
+  color: #ffffff !important;
+}
+.nav-item-lamp.active {
+  color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.1);
+}
+.nav-item-lamp.active::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 3px;
+  background: #3b82f6;
+  border-radius: 9999px;
+  box-shadow: 
+    0 -1px 8px rgba(59, 130, 246, 0.8),
+    0 1px 12px rgba(59, 130, 246, 0.4);
+}
+@media (max-width: 639px) {
+  .nav-item-lamp.active::after {
+    top: auto;
+    bottom: -2px;
+    height: 3px;
+  }
+}
+
+/* HoverButton Pointer Trail & Glass Effects */
+.hover-trail-button {
+  position: relative;
+  isolate: isolate;
+  background: rgba(7, 10, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease, filter 0.3s ease;
+}
+.hover-trail-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 
+    inset 0 0 0 1px rgba(170, 202, 255, 0.25),
+    inset 0 0 16px 0 rgba(170, 202, 255, 0.12),
+    inset 0 -3px 12px 0 rgba(170, 202, 255, 0.18),
+    0 1px 3px 0 rgba(0, 0, 0, 0.5),
+    0 4px 12px 0 rgba(0, 0, 0, 0.45);
+  mix-blend-mode: multiply;
+  transition: transform 0.3s ease;
+}
+.hover-trail-button:active::before {
+  transform: scale(0.975);
+}
+.pointer-trail-circle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  filter: blur(12px);
+  -webkit-filter: blur(12px);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+  /* Premium Light Dropdown Menu style */
+.nav-dropdown-menu {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
+  border-radius: 1rem !important;
+  min-width: 180px !important;
+}
+.nav-dropdown-item {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-family: 'Geist', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  padding: 12px 20px !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+.nav-dropdown-item:last-child {
+  border-bottom: none !important;
+}
+.nav-dropdown-item:hover {
+  color: #3b82f6 !important;
+  background-color: rgba(59, 130, 246, 0.15) !important;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.4) !important;
+}
+/* Active capsule styling */
+.nav-item-lamp.active-pill {
+  color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.12) !important;
+  border-radius: 9999px !important;
+}
+
+.nav-dropdown-menu.show-dropdown {
+  display: flex !important;
+}
+
+
+/* ===== LIGHT MODE OVERRIDES ===== */
+html, body { background-color: #ffffff !important; color: #0f172a; }
+h1.text-white, h2.text-white, h3.text-white { color: #0f172a !important; }
+.glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,249,255,0.90) 100%) !important;
+  border: 1px solid rgba(59,130,246,0.18) !important;
+  box-shadow: 0 8px 32px 0 rgba(59,130,246,0.10), inset 0 1px 0 0 rgba(255,255,255,0.9) !important;
+}
+.glass-morphism {
+  background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(240,249,255,0.93) 100%) !important;
+  border: 1px solid rgba(59,130,246,0.18) !important;
+  box-shadow: 0 20px 50px rgba(59,130,246,0.12) !important;
+}
+.nav-item { color: rgba(15,23,42,0.65) !important; }
+.nav-item:hover { color: #1d4ed8 !important; }
+.nav-item.active { color: #3b82f6 !important; text-decoration-color: #3b82f6 !important; }
+.nav-item-lamp:hover { color: #1d4ed8 !important; }
+.nav-item-lamp.active, .nav-item-lamp.active-pill {
+  color: #3b82f6 !important;
+  background: rgba(59,130,246,0.10) !important;
+}
+.nav-dropdown-menu {
+  background: rgba(255,255,255,0.98) !important;
+  border: 1px solid rgba(59,130,246,0.15) !important;
+  box-shadow: 0 20px 40px rgba(59,130,246,0.12) !important;
+}
+.nav-dropdown-item { color: rgba(15,23,42,0.75) !important; border-bottom: 1px solid rgba(59,130,246,0.08) !important; }
+.nav-dropdown-item:hover { color: #3b82f6 !important; background-color: rgba(59,130,246,0.06) !important; text-shadow: none !important; }
+.hover-trail-button {
+  background: rgba(255,255,255,0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(59,130,246,0.15) !important;
+  color: #1e293b !important;
+}
+.hover-trail-button::before { box-shadow: inset 0 0 0 1px rgba(59,130,246,0.2) !important; mix-blend-mode: normal !important; }
+.animated-shiny-text {
+  background: linear-gradient(90deg, #1e293b 0%, #3b82f6 30%, #0f172a 50%, #3b82f6 70%, #1e293b 100%) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.text-stroke { -webkit-text-stroke: 1px #1e293b !important; color: transparent !important; }
+.app-header { background: rgba(255,255,255,0.85) !important; backdrop-filter: blur(12px) !important; border-bottom: 1px solid rgba(59,130,246,0.10) !important; }
+
+</style>
+</head>
+<body class="text-on-surface font-body-md selection:bg-primary/30 overflow-x-hidden relative">
+<!-- Ambient Liquid Backdrop (Cobalt/Navy Gradient) -->
+<div class="fixed inset-0 z-[-2] pointer-events-none" style="background: linear-gradient(to bottom, #ffffff 0%, #f0f9ff 25%, #dbeafe 55%, #eff6ff 80%, #ffffff 100%);"></div>
+<div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+  <div class="absolute top-[20%] left-[-15%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-br from-blue-500/35 to-transparent orb-1 mix-blend-multiply"></div>
+  <div class="absolute bottom-[10%] right-[-15%] w-[70vw] h-[70vw] rounded-full bg-gradient-to-tr from-blue-400/30 to-transparent orb-2 mix-blend-multiply"></div>
+  <div class="absolute top-[50%] left-[30%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-blue-300/25 to-transparent orb-3 mix-blend-multiply"></div>
+</div>
+<header class="fixed top-0 w-full z-50 app-header">
+  <nav class="flex items-center justify-between h-[60px] px-6 md:px-10 max-w-full">
+    <a href="/home" class="shrink-0 mr-6 flex items-center translate-y-[6px]">
+      <img src="/logo.webp" alt="MYHitch Pass" width="200" height="200" class="w-[170px] md:w-[200px] h-auto object-contain select-none" style="filter: none;">
+    </a>
+        <div class="shrink-0 flex items-center gap-3 relative z-30">
+      <!-- My Tickets Button -->
+      <a href="/tickets" class="hover-trail-button inline-flex items-center gap-2 text-white px-4 py-2.5 rounded-full font-bold text-xs shrink-0">
+        <span class="material-symbols-outlined text-[16px] text-primary">confirmation_number</span>
+        <span class="hidden 2xl:inline">My Tickets</span>
+        <span class="w-4 h-4 rounded-full bg-error text-white flex items-center justify-center text-[9px] font-extrabold ml-0.5">2</span>
+      </a>
+      <!-- Profile Link -->
+      <a href="/profile" class="hover-trail-button inline-flex items-center gap-2 text-white px-4 py-2.5 rounded-full font-bold text-xs shrink-0">
+        <span class="material-symbols-outlined text-[16px] text-primary">person</span>
+        <span class="hidden 2xl:inline font-label-md">PROFILE</span>
+      </a>
+      <!-- Notification Link -->
+      <a href="/home" class="hover-trail-button flex items-center justify-center w-10 h-10 rounded-full text-white shrink-0 relative">
+        <span class="material-symbols-outlined text-primary" style="font-size:20px">notifications</span>
+        <span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error animate-pulse"></span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- Floating Navigation Bar (positioned fixed, collapses dynamically to prevent overlap) -->
+<div class="fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-3 pointer-events-auto">
+  <div class="flex items-center gap-1 bg-white/95 border border-blue-100 backdrop-blur-xl p-1 rounded-full shadow-xl shadow-blue-100/60">
+    <a href="/home" class="nav-item-lamp  px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">home</span>
+      <span class="hidden lg:inline">HOME</span>
+    </a>
+    <!-- Events Dropdown -->
+    <div class="relative group shrink-0">
+      <a href="/upcoming" class="nav-item-lamp active-pill px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1 text-slate-700 hover:text-blue-600">
+        <span class="material-symbols-outlined text-[18px] lg:hidden">event</span>
+        <span class="hidden lg:inline">EVENTS</span>
+        <span class="text-[9px] opacity-70 ml-0.5">▼</span>
+      </a>
+      <div class="hidden group-hover:flex flex-col absolute bottom-full sm:top-full left-1/2 -translate-x-1/2 mb-2 sm:mb-0 sm:mt-2 z-50 nav-dropdown-menu">
+        <a href="/upcoming" class="nav-dropdown-item">Upcoming Events</a>
+        <a href="/explore" class="nav-dropdown-item">Categories</a>
+        <a href="/broadway" class="nav-dropdown-item">Broadway Tickets</a>
+      </div>
+    </div>
+    <a href="/pricing" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">payments</span>
+      <span class="hidden lg:inline">PRICING</span>
+    </a>
+    <a href="/servicers" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">room_service</span>
+      <span class="hidden lg:inline">SERVICERS</span>
+    </a>
+    <a href="/about-us" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">info</span>
+      <span class="hidden lg:inline">ABOUT US</span>
+    </a>
+    <!-- Organiser Dropdown -->
+    <div class="relative group shrink-0">
+      <a href="/organizer" class="nav-item-lamp  px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1 text-slate-700 hover:text-blue-600">
+        <span class="material-symbols-outlined text-[18px] lg:hidden">corporate_fare</span>
+        <span class="hidden lg:inline">ORGANISER</span>
+        <span class="text-[9px] opacity-70 ml-0.5">▼</span>
+      </a>
+      <div class="hidden group-hover:flex flex-col absolute bottom-full sm:top-full left-1/2 -translate-x-1/2 mb-2 sm:mb-0 sm:mt-2 z-50 nav-dropdown-menu">
+        <a href="/organizer" class="nav-dropdown-item">Dashboard</a>
+        <a href="/organizer" class="nav-dropdown-item">Create Event</a>
+        <a href="/organizer" class="nav-dropdown-item">Analytics</a>
+      </div>
+    </div>
+    <a href="/contact-us" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">mail</span>
+      <span class="hidden lg:inline">CONTACT US</span>
+    </a>
+  </div>
+</div>
+<main class="pt-[60px] min-h-screen flex max-w-max-width mx-auto">
+  <!-- Sidebar -->
+  <aside class="hidden lg:flex flex-col p-6 gap-8 h-[calc(100vh-80px)] w-72 sticky top-20 bg-surface-container border-r border-white/5 overflow-y-auto">
+    <div class="space-y-2">
+      <p class="font-label-sm text-label-sm text-primary uppercase tracking-widest px-2 mb-4">Categories</p>
+      <a href="/explore" class="w-full flex items-center gap-3 p-3 bg-primary/10 text-primary border border-primary/20 rounded-xl transition-transform block">
+        <span class="material-symbols-outlined">explore</span><span class="font-label-md text-label-md">Discover All</span>
+      </a>
+      <a href="/explore" class="w-full flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-all block">
+        <span class="material-symbols-outlined">music_note</span><span class="font-label-md text-label-md">Concerts</span>
+      </a>
+      <a href="/explore" class="w-full flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-all block">
+        <span class="material-symbols-outlined">festival</span><span class="font-label-md text-label-md">Festivals</span>
+      </a>
+      <a href="/explore" class="w-full flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-all block">
+        <span class="material-symbols-outlined">sports_kabaddi</span><span class="font-label-md text-label-md">Sports</span>
+      </a>
+      <a href="/explore" class="w-full flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-xl transition-all block">
+        <span class="material-symbols-outlined">flight_takeoff</span><span class="font-label-md text-label-md">Travel</span>
+      </a>
+    </div>
+    <div class="h-px bg-white/5"></div>
+    <div class="space-y-6">
+      <p class="font-label-sm text-label-sm text-primary uppercase tracking-widest px-2">Refine Search</p>
+      <div class="px-2 space-y-2">
+        <label class="font-label-md text-label-md text-on-surface">Date Range</label>
+        <div class="relative">
+          <input class="w-full bg-surface-container-highest border border-white/10 rounded-xl p-3 text-label-md font-label-md focus:border-primary/50 ring-0" type="text" value="Oct 12 - Oct 28">
+          <span class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none">calendar_today</span>
+        </div>
+      </div>
+      <div class="px-2 space-y-4">
+        <div class="flex justify-between items-center">
+          <label class="font-label-md text-label-md text-on-surface">Price Range</label>
+          <span class="font-label-sm text-label-sm text-primary">$40 - $850</span>
+        </div>
+        <div class="relative h-1 w-full bg-surface-container-highest rounded-full">
+          <div class="absolute h-full left-1/4 right-1/4 bg-primary rounded-full"></div>
+          <div class="absolute top-1/2 -translate-y-1/2 left-1/4 w-4 h-4 bg-primary rounded-full shadow-[0_0_12px_rgba(192,193,255,0.6)] cursor-pointer"></div>
+          <div class="absolute top-1/2 -translate-y-1/2 right-1/4 w-4 h-4 bg-primary rounded-full shadow-[0_0_12px_rgba(192,193,255,0.6)] cursor-pointer"></div>
+        </div>
+      </div>
+      <div class="px-2 space-y-2">
+        <label class="font-label-md text-label-md text-on-surface">Location</label>
+        <select class="w-full bg-surface-container-highest border border-white/10 rounded-xl p-3 text-label-md font-label-md appearance-none focus:border-primary/50 ring-0">
+          <option>New York, NY</option><option>San Francisco, CA</option><option>Austin, TX</option><option>London, UK</option>
+        </select>
+      </div>
+    </div>
+    <div class="mt-auto pt-6">
+      <a href="/organizer" class="w-full py-3 bg-white text-[#070b19] font-bold rounded-full shadow-lg hover:brightness-110 active:scale-95 transition-all text-center flex items-center justify-center gap-2 group text-sm">
+        <span>Create Event</span>
+        <span class="w-5 h-5 rounded-full bg-[#070b19] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5"><span class="material-symbols-outlined text-[12px] font-bold">arrow_forward</span></span>
+      </a>
+    </div>
+  </aside>
+  <!-- Main -->
+  <section class="flex-1 p-margin-mobile md:p-margin-desktop overflow-y-auto">
+    <div class="mb-10 space-y-2">
+      <div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+        <a href="/home">Marketplace</a>
+        <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+        <span class="text-primary">Featured Passes</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-surface">Experience Everything.</h1>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-gutter mb-24">
+      <!-- Cards -->
+      <a href="/event-details" class="reveal-card glass-panel themed-card rounded-[2rem] overflow-hidden group cursor-pointer block" style="--theme-color: 320 100% 60%;">
+        <div class="relative h-64 overflow-hidden">
+          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1e0Tjt02OEYbvacdvoIPtnVwSbCARUoG0V_kpmrGYVRMM6oIr1V0BoCEGQ5bnLq1kmyxO5AkF3MMiyRsY0-SVWTsbC4eW3ZpqAE78oygHxo114TDdxcq_gAso2Rq9j_LoN-jkkWIRtSRXwojiNzQSoyG9u6xfigEq_oin8aFSQFCFhHARP9UOH4RPHzPwUKq1-EF3F8CzQBo0joSy4IBcIgmCEYOpFvLJJi45VEfpKvxf77bet8iVQJxqOV-ZXNBwE0Wfg6kDnZGC" alt="Neon Pulse">
+          <div class="absolute top-4 right-4">
+            <span class="inline-flex items-center gap-1.5 bg-[#070b19]/70 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-wider border border-white/10">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+              MUSIC
+            </span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex justify-between items-start">
+            <div><p class="text-primary font-label-md text-label-md">Oct 24 • Madison Square</p><h3 class="font-headline-md text-headline-md mt-1">Neon Pulse: After Hours</h3></div>
+            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">favorite</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/5">
+            <div class="flex -space-x-3">
+              <div class="w-8 h-8 rounded-full border-2 border-background bg-surface-container-high flex items-center justify-center overflow-hidden"><img alt="avatar" class="w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf-SRKldXThC0aP2XgzchyZegFH4lcEidQn8vdaMnn3CCIK4QopzaUJt4atervQSXg8d5Hd__necmGE5CVGWiXsXdBGk2YEaKu7GIfb00rO6BSMlP9ltVNqRJIvuaAv1my4BnUn0UqzYkwXjjkClnQWDd6F2z9yKJHrGq0c0VG4kSqHxBX_93YMH9B_N0D22nrL8fAeZPbajPJ4rLNgbCVT3nFbEMwWrscevFBY3rt_Law2ZFNnvkJTz1dhXmgqjHyCABzr2TMw_Jm"></div>
+              <div class="w-8 h-8 rounded-full border-2 border-background bg-surface-container-high flex items-center justify-center overflow-hidden"><img alt="avatar" class="w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMWxVPC3wUEyHG_-q79C4TFFk53MLdgd_4NwgUkyUFLYgcUZdn_tImJxzCBOsRSbFDOB_LH6WhVq4MxVwnZp9Ez4zfVUwYPsrOKWJDm1sNFR1spczylu7V4xOabNo4hz7RkwDDcAf80H1KXUpuL4tbow5br8RwpZNk2fqfk1z3J6LDwb0oLKnpbK0rOjQ2gAufKg5_lBYr9cDHb_3LXRRH5lnhxhJ2UgAWZOlk2SMArcc70hZhVMjgjbzglsXkOrxKpkSvUR4rTFi9"></div>
+              <div class="w-8 h-8 rounded-full border-2 border-background bg-surface-container flex items-center justify-center text-[10px] font-bold text-primary-container">+82</div>
+            </div>
+            <div class="text-right"><p class="text-on-surface-variant text-[10px] uppercase font-bold tracking-tighter">Starting At</p><p class="text-primary font-headline-md text-headline-md">$129.00</p></div>
+          </div>
+        </div>
+      </a>
+      <a href="/event-details" class="reveal-card glass-panel themed-card rounded-[2rem] overflow-hidden group cursor-pointer block" style="--theme-color: 200 100% 50%;">
+        <div class="relative h-64 overflow-hidden">
+          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBngsgQSO4rAnM_y5EO_adee572v2KguXNU-7ywbkiAcFjwtsAZVqrs7XkXIvaUJK-yc0tM4nb4SvfbMMCmGSLG5KA-GqLNeaWaeLVhI3DtaVgKFGXBCXo9RBv6mcOuq5avRXzgDd-T4KzLXj44TbsWQw2XskupDSu5kZyNJpIZ4DycfVjyntvGRh9DUqs6u6izdkfskHalcKLIbDOEuRYNQq8FQfEiiLJnT7uyOfdOYJSelDYxfCYQgX8p-phawdTLc7Ya6t97Zv-B" alt="Future Web Summit">
+          <div class="absolute top-4 right-4">
+            <span class="inline-flex items-center gap-1.5 bg-[#070b19]/70 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-wider border border-white/10">
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+              CONFERENCE
+            </span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex justify-between items-start">
+            <div><p class="text-primary font-label-md text-label-md">Nov 02 • Silicon Valley</p><h3 class="font-headline-md text-headline-md mt-1">Future Web Summit 2024</h3></div>
+            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">favorite</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/5">
+            <div class="bg-primary/10 text-primary px-3 py-1 rounded-lg font-label-sm text-label-sm">4 Seats Left</div>
+            <div class="text-right"><p class="text-on-surface-variant text-[10px] uppercase font-bold tracking-tighter">Starting At</p><p class="text-primary font-headline-md text-headline-md">$850.00</p></div>
+          </div>
+        </div>
+      </a>
+      <a href="/event-details" class="reveal-card glass-panel themed-card rounded-[2rem] overflow-hidden group cursor-pointer border-primary/30 block" style="--theme-color: 45 100% 50%;">
+        <div class="relative h-64 overflow-hidden">
+          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqj5tSW6XxpHzZeW25NoZNCoUP_Df-QZkXRwhr3I-oHLFLfFnq1JqO0NHVPV9OT96wdQBdD4u4znMm7VInSrOXg0p9bIPEhaIRqYpMCUorLxLIYnK6oc145yMghE4p-07nGQDwQeHjvPVcVo5wjdrNVPTRRok2GDcnfB4b7uiZZMLY2hvpHO5ehvD_Uw6M1KbBFiSdhyWFJLY9URuitEJBqSfIBKiSkzi9nULoIDb4YQXhBGMkeRN8cx2FJOphCUQyf_Qzl76VKY0x" alt="Summit Peak Lodge Gala">
+          <div class="absolute top-4 left-4">
+            <span class="inline-flex items-center gap-1.5 bg-[#070b19]/70 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-wider border border-white/10">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+              LIMITED ACCESS
+            </span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex justify-between items-start">
+            <div><p class="text-primary font-label-md text-label-md">Dec 15 • Aspen, CO</p><h3 class="font-headline-md text-headline-md mt-1">Summit Peak Lodge Gala</h3></div>
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">bookmark</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/5">
+            <div class="flex items-center gap-1"><span class="material-symbols-outlined text-primary text-[18px]">star</span><span class="font-label-md text-label-md">4.9 VIP Rating</span></div>
+            <div class="text-right"><p class="text-on-surface-variant text-[10px] uppercase font-bold tracking-tighter">VIP Entry</p><p class="text-primary font-headline-md text-headline-md">$2,400.00</p></div>
+          </div>
+        </div>
+      </a>
+      <a href="/event-details" class="reveal-card glass-panel themed-card rounded-[2rem] overflow-hidden group cursor-pointer block" style="--theme-color: 160 100% 40%;">
+        <div class="relative h-64 overflow-hidden">
+          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC900uU5IRYTP-hMIXgxAsosJukngaFQxIc0jhEKZy5ZKaWHTtIBfrFkQ_Lsg7XXRYv6DX_qns3noFYaEh_6AV-0rSkLz-ootFgU02S2U6Elmt6ywLNlaELt5tcQ18bJUtaafbfiN5ZbmEYtkFdEYk8V-c22pckaq-DPmPy5GyFpizB76DnWowZYn5E8Vr5CiX3gJEB-eE8JPBooe8GO68qDD_N5XOAvQ6NdOfTkXvvSkspxAN8f3MTNeYwysKAdshmywfcGA8O6B7n" alt="Bali Retreat">
+          <div class="absolute top-4 right-4">
+            <span class="inline-flex items-center gap-1.5 bg-[#070b19]/70 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-wider border border-white/10">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+              TRAVEL
+            </span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex justify-between items-start">
+            <div><p class="text-primary font-label-md text-label-md">Jan 12 • Bali, Indonesia</p><h3 class="font-headline-md text-headline-md mt-1">Bali Digital Nomad Retreat</h3></div>
+            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">favorite</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/5">
+            <div class="bg-surface-container-highest px-3 py-1 rounded-lg text-on-surface-variant font-label-sm text-label-sm">All-Inclusive</div>
+            <div class="text-right"><p class="text-on-surface-variant text-[10px] uppercase font-bold tracking-tighter">Packages From</p><p class="text-primary font-headline-md text-headline-md">$1,199.00</p></div>
+          </div>
+        </div>
+      </a>
+      <a href="/event-details" class="reveal-card glass-panel themed-card rounded-[2rem] overflow-hidden group cursor-pointer block" style="--theme-color: 15 100% 55%;">
+        <div class="relative h-64 overflow-hidden">
+          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeqZZiiQx_MfZmEiJ09TNpTYu8ONUdR8abP4auKB1k3QrvjvFZ_3qtiStqn86R1wWOb2kafyVKRp4URtArO4LXF-PMG2wwWW3UZEZFFCwXmAuePDE22ORM1z1qDrXz8FjPYxUrcXyp09lH5BHjPK4huRmdUGiT_-RI-gEsohsakF60ND8NyxwXFlWVCptiJ1FRk_6VUzv4hFFwcHWcmToRZiDY2xIVAGLHSzcIAAeBdmuEvCSJg4qxWIX9i_y6aPkp8RUpzrzIymFV" alt="Brooklyn Nets vs Lakers">
+          <div class="absolute top-4 right-4">
+            <span class="inline-flex items-center gap-1.5 bg-[#070b19]/70 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-wider border border-white/10">
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+              SPORTS
+            </span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex justify-between items-start">
+            <div><p class="text-primary font-label-md text-label-md">Nov 18 • Barclays Center</p><h3 class="font-headline-md text-headline-md mt-1">Brooklyn Nets vs. Lakers</h3></div>
+            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">favorite</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/5">
+            <div class="bg-error-container/20 text-error px-3 py-1 rounded-lg font-label-sm text-label-sm">Resale Only</div>
+            <div class="text-right"><p class="text-on-surface-variant text-[10px] uppercase font-bold tracking-tighter">Starting At</p><p class="text-primary font-headline-md text-headline-md">$245.00</p></div>
+          </div>
+        </div>
+      </a>
+      <a href="/event-details" class="reveal-card glass-panel themed-card rounded-[2rem] overflow-hidden group cursor-pointer block" style="--theme-color: 30 100% 50%;">
+        <div class="relative h-64 overflow-hidden">
+          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoa6obSDLSDTJSVAiuCSFcV-FnCRbg2u4HaYRq_g7vRBcu3BVe_7lRZYUU6fxPmF89joLzZ-yVjCuOJdqQNevxjqyA77dztPv46nJnAA4UyHxHqNanggb_73DRxhu3Q6p48l1BdeZ8PI9cPIDG2RJXdnEah67ZVKA_aSI2TTlBNn_I2lGNSr_ZBR_Am7EET2SautM-yImPU3sADCROL2BqJZIpFx21RxKcbeEsofQ3_pwAVb_eWoEKnkZ2Nc3xA2jMY0oITrCRIbhw" alt="Ghost Frequency Halloween">
+          <div class="absolute top-4 right-4">
+            <span class="inline-flex items-center gap-1.5 bg-[#070b19]/70 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-wider border border-white/10">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+              MUSIC
+            </span>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex justify-between items-start">
+            <div><p class="text-primary font-label-md text-label-md">Oct 31 • Terminal 5</p><h3 class="font-headline-md text-headline-md mt-1">Ghost Frequency Halloween</h3></div>
+            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">favorite</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/5">
+            <div class="bg-primary/10 text-primary px-3 py-1 rounded-lg font-label-sm text-label-sm">Fast Pass Inc.</div>
+            <div class="text-right"><p class="text-on-surface-variant text-[10px] uppercase font-bold tracking-tighter">Starting At</p><p class="text-primary font-headline-md text-headline-md">$85.00</p></div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- Promo Banner -->
+    <div class="reveal-card flex flex-col md:flex-row gap-gutter bg-[#070b19]/80 border border-primary/30 rounded-[2.5rem] p-8 md:p-12 mb-20 relative overflow-hidden group active shadow-2xl shadow-primary/5">
+      <div class="absolute -right-20 -top-20 w-96 h-96 bg-[#3b82f6]/10 blur-[100px] rounded-full"></div>
+      <div class="md:w-1/2 z-10 space-y-6">
+        <h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-white">Unlock the Full Pass Ecosystem.</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant/80">Get exclusive pre-sale access, zero booking fees, and VIP entrance to over 5,000 global events with a Premium Membership.</p>
+        <a href="/register" class="inline-flex items-center gap-2 bg-white text-[#070b19] px-8 py-3.5 rounded-full font-bold text-sm shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:brightness-110 active:scale-95 transition-all group">
+          <span>Upgrade for $19.99/mo</span>
+          <span class="w-5 h-5 rounded-full bg-[#070b19] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5"><span class="material-symbols-outlined text-[12px] font-bold">arrow_forward</span></span>
+        </a>
+      </div>
+      <div class="md:w-1/2 h-64 md:h-auto rounded-3xl overflow-hidden shadow-2xl z-10 rotate-2 group-hover:rotate-0 transition-transform duration-500">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoZwCOvDfn-9UJSIA17471PD_h8xtSlBBmSFLhHUirS0M1fc679apRs_2FypWRhVhrjGFasmHyGVqcgZlD-RfOq6hULy_PeffE3QAMRD-tl2MrsdQUn4pSygwkblTylDRYXGtuAuxxxhasR1fu84d1SjJqp1_CnxbsSD0oGimsO4bgJlAFEKG8VVPXYzoUV9C-Z8eyNReQUjcadrXLMmeH0iMpvJzdvOo4KKYnCYQQpBp1Kbnz8M-gM0_9bFgsx1mZNK-5qqKCc9nO" alt="Premium">
+      </div>
+    </div>
+  </section>
+</main>
+<!-- Mobile Bottom Nav -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-3 px-6 bg-surface/12 backdrop-blur-2xl border-t border-white/10 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] z-50 rounded-t-xl">
+  <a href="/explore" class="flex flex-col items-center justify-center text-primary active:scale-90 transition-all"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">search</span><span class="font-label-sm text-label-sm">Events</span></a>
+  <a href="/tickets" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all"><span class="material-symbols-outlined">confirmation_number</span><span class="font-label-sm text-label-sm">Tickets</span></a>
+  <a href="/tickets" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all"><span class="material-symbols-outlined">bookmark</span><span class="font-label-sm text-label-sm">Saved</span></a>
+  <a href="/profile" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-all"><span class="material-symbols-outlined">person</span><span class="font-label-sm text-label-sm">Profile</span></a>
+</nav>
+<script>
+const obs=new IntersectionObserver((entries)=>{entries.forEach((entry,i)=>{if(entry.isIntersecting)setTimeout(()=>entry.target.classList.add('active'),i*50);});},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal-card').forEach(c=>obs.observe(c));
+</script>
+<script>
+(function() {
+  // Pointer trail circles logic for HoverButton
+  document.querySelectorAll('.hover-trail-button').forEach(button => {
+    let isListening = false;
+    let lastAdded = 0;
+
+    button.addEventListener('pointerenter', () => {
+      isListening = true;
+    });
+
+    button.addEventListener('pointerleave', () => {
+      isListening = false;
+    });
+
+    button.addEventListener('pointermove', (e) => {
+      if (!isListening) return;
+      const now = Date.now();
+      if (now - lastAdded > 100) {
+        lastAdded = now;
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const circle = document.createElement('div');
+        circle.className = 'pointer-trail-circle';
+        circle.style.left = x + 'px';
+        circle.style.top = y + 'px';
+        
+        const xPos = x / rect.width;
+        circle.style.background = 'linear-gradient(to right, #a0d9f8 ' + (xPos * 100) + '%, #3a5bbf ' + (xPos * 100) + '%)';
+
+        button.appendChild(circle);
+
+        setTimeout(() => {
+          circle.style.opacity = '0.75';
+        }, 50);
+
+        setTimeout(() => {
+          circle.style.opacity = '0';
+          circle.style.transition = 'opacity 1.2s ease';
+        }, 1000);
+
+        setTimeout(() => {
+          circle.remove();
+        }, 2200);
+      }
+    });
+  });
+})();
+</script>
+
+<!-- Dropdown Toggle Script -->
+<script>
+(function() {
+  document.querySelectorAll('.relative.group > a').forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const menu = this.nextElementSibling;
+      if (menu && menu.classList.contains('nav-dropdown-menu')) {
+        const isShown = menu.classList.contains('show-dropdown');
+        document.querySelectorAll('.nav-dropdown-menu').forEach(m => m.classList.remove('show-dropdown'));
+        if (!isShown) {
+          menu.classList.add('show-dropdown');
+        }
+      }
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.nav-dropdown-menu').forEach(m => m.classList.remove('show-dropdown'));
+  });
+})();
+</script>
+</body>
+</html>

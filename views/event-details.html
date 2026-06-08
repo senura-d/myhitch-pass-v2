@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html class="" lang="en" style="background-color: #ffffff;">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYHitch Pass | Neon Horizons Summit 2024</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary": "#3b82f6","secondary": "#3b82f6","electric-cyan": "#3b82f6","surface": "#ffffff","surface-container": "#f0f9ff","surface-container-high": "#e0f2fe","surface-container-highest": "#bae6fd","on-surface": "#0f172a","on-surface-variant": "#334155","background": "#f8fafc","on-background": "#0f172a","error":"#ef4444","error-container":"#7f1d1d","on-error":"#ffffff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"max-width":"1280px","margin-mobile":"20px","margin-desktop":"48px",gutter:"16px",base:"8px"},fontFamily:{"label-sm":["Geist"],"label-md":["Geist"],"display-lg":["Geist"],"body-md":["Inter"],"display-lg-mobile":["Geist"],"headline-md":["Geist"],"body-lg":["Inter"],"headline-lg":["Geist"]},fontSize:{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.05em","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.04em","fontWeight":"800"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],"display-lg-mobile":["32px",{"lineHeight":"38px","letterSpacing":"-0.03em","fontWeight":"800"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-lg":["30px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+<style>
+html {
+  background-color: #ffffff;
+}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+.icon-fill{font-variation-settings:'FILL' 1}
+.glass-panel{background:linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%), rgba(7,11,25,0.55);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 32px 0 rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.15), inset 0 -1px 0 0 rgba(255,255,255,0.05);position:relative;overflow:hidden}
+.glass-panel::before{content:'';position:absolute;top:0;left:-150%;width:50%;height:100%;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.08) 50%,rgba(255,255,255,0) 100%);transform:skewX(-25deg);transition:left 0.75s ease-in-out;pointer-events:none;z-index:1}
+.glass-panel:hover::before{left:150%}
+.liquid-hover{transition:all .4s cubic-bezier(0.16,1,0.3,1)}
+.liquid-hover:hover{transform:scale(1.02) translateY(-4px);box-shadow:0 12px 40px -10px rgba(59, 130, 246,0.2);border-color:rgba(59, 130, 246,0.2)}
+.reveal{opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(0.16,1,0.3,1)}
+.reveal.active{opacity:1;transform:translateY(0)}
+.orb-1{animation:morph 12s ease-in-out infinite both alternate,float1 24s ease-in-out infinite;filter:blur(140px);opacity:.08}
+.orb-2{animation:morph 14s ease-in-out infinite both alternate,float2 28s ease-in-out infinite;filter:blur(140px);opacity:.06}
+.orb-3{animation:morph 16s ease-in-out infinite both alternate,float3 32s ease-in-out infinite,pulse3 10s ease-in-out infinite alternate;filter:blur(140px)}
+@keyframes float1{0%{transform:translate(0,0) scale(1)}33%{transform:translate(80px,-100px) scale(1.15)}66%{transform:translate(-50px,50px) scale(0.9)}100%{transform:translate(0,0) scale(1)}}
+@keyframes float2{0%{transform:translate(0,0) scale(1)}33%{transform:translate(-100px,60px) scale(0.85)}66%{transform:translate(50px,-90px) scale(1.1)}100%{transform:translate(0,0) scale(1)}}
+@keyframes float3{0%{transform:translate(0,0) scale(1)}50%{transform:translate(120px,90px) scale(1.2)}100%{transform:translate(0,0) scale(1)}}
+@keyframes pulse1 { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.28; } }
+@keyframes pulse2 { 0%, 100% { opacity: 0.12; } 50% { opacity: 0.25; } }
+@keyframes pulse3 { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.22; } }
+@keyframes morph{
+  0%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}
+  50%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%}
+  100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%}
+}
+html{scroll-behavior:smooth}
+body{animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.app-header{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:none}
+.nav-item{font-family: 'Geist', sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.58);text-decoration:none;transition:color .2s;text-transform:uppercase;flex-shrink:0;text-align:center;line-height:1.3}
+.nav-item:hover{color:#fff}
+.nav-item.active{color:#fff;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px;text-decoration-color:#3b82f6}
+.nav-scroll::-webkit-scrollbar{display:none}
+
+/* Floating NavBar & Lamp effect */
+.nav-item-lamp {
+  position: relative;
+  transition: all 0.3s ease;
+}
+.nav-item-lamp:hover {
+  color: #ffffff !important;
+}
+.nav-item-lamp.active {
+  color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.1);
+}
+.nav-item-lamp.active::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 3px;
+  background: #3b82f6;
+  border-radius: 9999px;
+  box-shadow: 
+    0 -1px 8px rgba(59, 130, 246, 0.8),
+    0 1px 12px rgba(59, 130, 246, 0.4);
+}
+@media (max-width: 639px) {
+  .nav-item-lamp.active::after {
+    top: auto;
+    bottom: -2px;
+    height: 3px;
+  }
+}
+
+/* HoverButton Pointer Trail & Glass Effects */
+.hover-trail-button {
+  position: relative;
+  isolate: isolate;
+  background: rgba(7, 10, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease, filter 0.3s ease;
+}
+.hover-trail-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 
+    inset 0 0 0 1px rgba(170, 202, 255, 0.25),
+    inset 0 0 16px 0 rgba(170, 202, 255, 0.12),
+    inset 0 -3px 12px 0 rgba(170, 202, 255, 0.18),
+    0 1px 3px 0 rgba(0, 0, 0, 0.5),
+    0 4px 12px 0 rgba(0, 0, 0, 0.45);
+  mix-blend-mode: multiply;
+  transition: transform 0.3s ease;
+}
+.hover-trail-button:active::before {
+  transform: scale(0.975);
+}
+.pointer-trail-circle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  filter: blur(12px);
+  -webkit-filter: blur(12px);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+  /* Premium Light Dropdown Menu style */
+.nav-dropdown-menu {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
+  border-radius: 1rem !important;
+  min-width: 180px !important;
+}
+.nav-dropdown-item {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-family: 'Geist', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  padding: 12px 20px !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+.nav-dropdown-item:last-child {
+  border-bottom: none !important;
+}
+.nav-dropdown-item:hover {
+  color: #3b82f6 !important;
+  background-color: rgba(59, 130, 246, 0.15) !important;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.4) !important;
+}
+/* Active capsule styling */
+.nav-item-lamp.active-pill {
+  color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.12) !important;
+  border-radius: 9999px !important;
+}
+
+.nav-dropdown-menu.show-dropdown {
+  display: flex !important;
+}
+
+
+/* ===== LIGHT MODE OVERRIDES ===== */
+html, body { background-color: #ffffff !important; color: #0f172a; }
+h1.text-white, h2.text-white, h3.text-white { color: #0f172a !important; }
+.glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,249,255,0.90) 100%) !important;
+  border: 1px solid rgba(59,130,246,0.18) !important;
+  box-shadow: 0 8px 32px 0 rgba(59,130,246,0.10), inset 0 1px 0 0 rgba(255,255,255,0.9) !important;
+}
+.glass-morphism {
+  background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(240,249,255,0.93) 100%) !important;
+  border: 1px solid rgba(59,130,246,0.18) !important;
+  box-shadow: 0 20px 50px rgba(59,130,246,0.12) !important;
+}
+.nav-item { color: rgba(15,23,42,0.65) !important; }
+.nav-item:hover { color: #1d4ed8 !important; }
+.nav-item.active { color: #3b82f6 !important; text-decoration-color: #3b82f6 !important; }
+.nav-item-lamp:hover { color: #1d4ed8 !important; }
+.nav-item-lamp.active, .nav-item-lamp.active-pill {
+  color: #3b82f6 !important;
+  background: rgba(59,130,246,0.10) !important;
+}
+.nav-dropdown-menu {
+  background: rgba(255,255,255,0.98) !important;
+  border: 1px solid rgba(59,130,246,0.15) !important;
+  box-shadow: 0 20px 40px rgba(59,130,246,0.12) !important;
+}
+.nav-dropdown-item { color: rgba(15,23,42,0.75) !important; border-bottom: 1px solid rgba(59,130,246,0.08) !important; }
+.nav-dropdown-item:hover { color: #3b82f6 !important; background-color: rgba(59,130,246,0.06) !important; text-shadow: none !important; }
+.hover-trail-button {
+  background: rgba(255,255,255,0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(59,130,246,0.15) !important;
+  color: #1e293b !important;
+}
+.hover-trail-button::before { box-shadow: inset 0 0 0 1px rgba(59,130,246,0.2) !important; mix-blend-mode: normal !important; }
+.animated-shiny-text {
+  background: linear-gradient(90deg, #1e293b 0%, #3b82f6 30%, #0f172a 50%, #3b82f6 70%, #1e293b 100%) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.text-stroke { -webkit-text-stroke: 1px #1e293b !important; color: transparent !important; }
+.app-header { background: rgba(255,255,255,0.85) !important; backdrop-filter: blur(12px) !important; border-bottom: 1px solid rgba(59,130,246,0.10) !important; }
+
+</style>
+</head>
+<body class="text-on-background font-body-md antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container relative overflow-x-hidden">
+<!-- Ambient Liquid Backdrop (Cobalt/Navy Gradient) -->
+<div class="fixed inset-0 z-[-2] pointer-events-none" style="background: linear-gradient(to bottom, #ffffff 0%, #f0f9ff 25%, #dbeafe 55%, #eff6ff 80%, #ffffff 100%);"></div>
+<div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+  <div class="absolute top-[20%] left-[-15%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-br from-blue-500/35 to-transparent orb-1 mix-blend-multiply"></div>
+  <div class="absolute bottom-[10%] right-[-15%] w-[70vw] h-[70vw] rounded-full bg-gradient-to-tr from-blue-400/30 to-transparent orb-2 mix-blend-multiply"></div>
+  <div class="absolute top-[50%] left-[30%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-blue-300/25 to-transparent orb-3 mix-blend-multiply"></div>
+</div>
+<header class="fixed top-0 w-full z-50 app-header">
+  <nav class="flex items-center justify-between h-[60px] px-6 md:px-10 max-w-full">
+    <a href="/home" class="shrink-0 mr-6 flex items-center translate-y-[6px]">
+      <img src="/logo.webp" alt="MYHitch Pass" width="200" height="200" class="w-[170px] md:w-[200px] h-auto object-contain select-none" style="filter: none;">
+    </a>
+        <div class="shrink-0 flex items-center gap-3 relative z-30">
+      <!-- My Tickets Button -->
+      <a href="/tickets" class="hover-trail-button inline-flex items-center gap-2 text-white px-4 py-2.5 rounded-full font-bold text-xs shrink-0">
+        <span class="material-symbols-outlined text-[16px] text-primary">confirmation_number</span>
+        <span class="hidden 2xl:inline">My Tickets</span>
+        <span class="w-4 h-4 rounded-full bg-error text-white flex items-center justify-center text-[9px] font-extrabold ml-0.5">2</span>
+      </a>
+      <!-- Profile Link -->
+      <a href="/profile" class="hover-trail-button inline-flex items-center gap-2 text-white px-4 py-2.5 rounded-full font-bold text-xs shrink-0">
+        <span class="material-symbols-outlined text-[16px] text-primary">person</span>
+        <span class="hidden 2xl:inline font-label-md">PROFILE</span>
+      </a>
+      <!-- Notification Link -->
+      <a href="/home" class="hover-trail-button flex items-center justify-center w-10 h-10 rounded-full text-white shrink-0 relative">
+        <span class="material-symbols-outlined text-primary" style="font-size:20px">notifications</span>
+        <span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-error animate-pulse"></span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- Floating Navigation Bar (positioned fixed, collapses dynamically to prevent overlap) -->
+<div class="fixed bottom-0 sm:top-0 left-1/2 -translate-x-1/2 z-50 mb-6 sm:pt-3 pointer-events-auto">
+  <div class="flex items-center gap-1 bg-white/95 border border-blue-100 backdrop-blur-xl p-1 rounded-full shadow-xl shadow-blue-100/60">
+    <a href="/home" class="nav-item-lamp  px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">home</span>
+      <span class="hidden lg:inline">HOME</span>
+    </a>
+    <!-- Events Dropdown -->
+    <div class="relative group shrink-0">
+      <a href="/upcoming" class="nav-item-lamp active-pill px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1 text-slate-700 hover:text-blue-600">
+        <span class="material-symbols-outlined text-[18px] lg:hidden">event</span>
+        <span class="hidden lg:inline">EVENTS</span>
+        <span class="text-[9px] opacity-70 ml-0.5">▼</span>
+      </a>
+      <div class="hidden group-hover:flex flex-col absolute bottom-full sm:top-full left-1/2 -translate-x-1/2 mb-2 sm:mb-0 sm:mt-2 z-50 nav-dropdown-menu">
+        <a href="/upcoming" class="nav-dropdown-item">Upcoming Events</a>
+        <a href="/explore" class="nav-dropdown-item">Categories</a>
+        <a href="/broadway" class="nav-dropdown-item">Broadway Tickets</a>
+      </div>
+    </div>
+    <a href="/pricing" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">payments</span>
+      <span class="hidden lg:inline">PRICING</span>
+    </a>
+    <a href="/servicers" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">room_service</span>
+      <span class="hidden lg:inline">SERVICERS</span>
+    </a>
+    <a href="/about-us" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">info</span>
+      <span class="hidden lg:inline">ABOUT US</span>
+    </a>
+    <!-- Organiser Dropdown -->
+    <div class="relative group shrink-0">
+      <a href="/organizer" class="nav-item-lamp  px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1 text-slate-700 hover:text-blue-600">
+        <span class="material-symbols-outlined text-[18px] lg:hidden">corporate_fare</span>
+        <span class="hidden lg:inline">ORGANISER</span>
+        <span class="text-[9px] opacity-70 ml-0.5">▼</span>
+      </a>
+      <div class="hidden group-hover:flex flex-col absolute bottom-full sm:top-full left-1/2 -translate-x-1/2 mb-2 sm:mb-0 sm:mt-2 z-50 nav-dropdown-menu">
+        <a href="/organizer" class="nav-dropdown-item">Dashboard</a>
+        <a href="/organizer" class="nav-dropdown-item">Create Event</a>
+        <a href="/organizer" class="nav-dropdown-item">Analytics</a>
+      </div>
+    </div>
+    <a href="/contact-us" class="nav-item-lamp px-5 py-2 text-xs font-semibold rounded-full transition-all flex items-center gap-1.5 text-slate-700 hover:text-blue-600">
+      <span class="material-symbols-outlined text-[18px] lg:hidden">mail</span>
+      <span class="hidden lg:inline">CONTACT US</span>
+    </a>
+  </div>
+</div>
+<!-- Hero -->
+  <section class="relative w-full h-[70vh] min-h-[500px] overflow-hidden reveal active">
+    <div class="absolute inset-0 w-full h-full">
+      <img id="event-hero-img" class="w-full h-full object-cover object-center opacity-100 mix-blend-lighten" src="" alt="Event Image">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+    <div class="absolute bottom-0 w-full px-margin-mobile md:px-margin-desktop pb-16 pt-32 max-w-max-width mx-auto left-0 right-0 z-10">
+      <div id="event-tags" class="flex flex-wrap gap-3 mb-8 reveal" style="transition-delay:.1s">
+        <!-- Dynamically populated -->
+      </div>
+      <h1 id="event-title" class="font-display-lg-mobile text-display-lg-mobile md:text-6xl lg:text-[80px] leading-[1.1] font-extrabold text-white mb-6 tracking-tight reveal" style="transition-delay:.2s">
+        <!-- Dynamically populated -->
+      </h1>
+      <p id="event-desc" class="font-body-lg text-xl md:text-2xl text-on-surface-variant max-w-3xl leading-relaxed reveal" style="transition-delay:.3s">
+        <!-- Dynamically populated -->
+      </p>
+    </div>
+  </section>
+  <!-- Details Grid -->
+  <section class="max-w-max-width mx-auto w-full px-margin-mobile md:px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 relative z-20 mt-12">
+    <!-- Left -->
+    <div class="lg:col-span-8 flex flex-col gap-20">
+      <div class="glass-panel rounded-3xl p-8 flex flex-col sm:flex-row justify-between gap-8 reveal liquid-hover">
+        <div class="flex items-start gap-5">
+          <div class="bg-primary/10 rounded-2xl p-4 text-primary ring-1 ring-primary/20"><span class="material-symbols-outlined icon-fill text-3xl">calendar_month</span></div>
+          <div><h3 class="font-label-md text-sm tracking-widest text-on-surface-variant mb-2 uppercase">Date & Time</h3><p id="event-date" class="font-body-lg text-xl text-white font-medium"><!-- Dynamically populated --></p></div>
+        </div>
+        <div class="w-px bg-white/10 hidden sm:block"></div>
+        <div class="flex items-start gap-5">
+          <div class="bg-primary/10 rounded-2xl p-4 text-primary ring-1 ring-secondary/20"><span class="material-symbols-outlined icon-fill text-3xl">location_on</span></div>
+          <div><h3 class="font-label-md text-sm tracking-widest text-on-surface-variant mb-2 uppercase">Venue</h3><p id="event-venue" class="font-body-lg text-xl text-white font-medium"><!-- Dynamically populated --></p></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-8">About the Event</h2>
+        <div id="event-about" class="font-body-lg text-xl text-on-surface-variant space-y-8 leading-relaxed">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+      <!-- Headliners -->
+      <div class="reveal">
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-8" id="guests-title">Headliners</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="guests-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+      <!-- Location -->
+      <div class="reveal">
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-8">Location</h2>
+        <div class="w-full h-80 glass-panel rounded-3xl relative overflow-hidden group cursor-pointer liquid-hover">
+          <img class="w-full h-full object-cover opacity-95 mix-blend-luminosity group-hover:opacity-100 transition-all duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxuUQ0tS0jYBl_YuXx09lmhvvOgz0lwrhbqBJ-bL1e3bQVJn7YdStxdpbJC6kTyKRtgGy3uC9DqpgE25_4lfvCyoFSOu2EN00iKi6RUn5cU086FZgvXph1TKf5cgf7AMCVQNrZidP0gWp3gdIbjdkcgXHYHfwTmlMnclmK_JpjQX4-0CLQCGS-pUVyQPwrFq3xJ4xjeUu5Oll4Zx8408LoTYQ1V1dV5Ec1suRr6xMUGvVv4M_lyCx3dX8POQKpcaVu4w" alt="Map">
+          <div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+            <div class="bg-white/10 backdrop-blur-md text-white rounded-full p-4 ring-1 ring-white/20 shadow-[0_0_30px_rgba(255,255,255,0.2)] mb-4 transition-transform duration-500 group-hover:scale-110"><span class="material-symbols-outlined icon-fill text-3xl">location_on</span></div>
+            <span class="font-label-md text-sm tracking-widest text-white bg-black/40 backdrop-blur-xl px-6 py-2.5 rounded-full ring-1 ring-white/20 uppercase">View on Map</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Right: Ticket Widget -->
+    <div class="lg:col-span-4 relative mt-16 lg:mt-0 reveal">
+      <div class="sticky top-28 glass-panel rounded-[2rem] p-8 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] border-t border-l border-white/20">
+        <div class="flex flex-col gap-8">
+          <div>
+            <h2 class="text-3xl font-extrabold text-white mb-6">Select Tickets</h2>
+            <div class="bg-error/10 text-[#ffb4ab] backdrop-blur-md ring-1 ring-error/30 rounded-full py-2.5 px-5 flex items-center gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse shrink-0"></span>
+              <span class="font-label-md text-xs font-semibold tracking-wide uppercase">High demand! Only 12 VIP tickets left.</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4" id="ticket-tiers">
+            <label class="relative flex flex-col gap-3 p-6 rounded-2xl border-2 border-white/10 bg-white/5 cursor-pointer hover:bg-white/10 transition-all duration-300 ticket-tier" data-price="150">
+              <input class="peer sr-only" name="ticket_tier" type="radio" value="general">
+              <div class="absolute inset-0 rounded-2xl ring-2 ring-primary opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></div>
+              <div class="flex justify-between items-start">
+                <div class="flex items-center gap-4">
+                  <div class="w-6 h-6 rounded-full border-2 border-white/20 flex items-center justify-center transition-colors radio-circle"><div class="w-2.5 h-2.5 rounded-full bg-white opacity-0 radio-dot"></div></div>
+                  <span class="text-lg font-bold text-white">General Admission</span>
+                </div>
+                <span class="text-2xl font-extrabold text-white">$150</span>
+              </div>
+              <p class="font-body-md text-on-surface-variant pl-10 text-sm leading-relaxed">Access to main festival grounds, food trucks, and standard art installations.</p>
+            </label>
+            <label class="relative flex flex-col gap-3 p-6 rounded-2xl border-2 border-primary/50 bg-primary/10 cursor-pointer hover:bg-primary/20 transition-all duration-300 ticket-tier" data-price="450">
+              <input checked class="peer sr-only" name="ticket_tier" type="radio" value="vip">
+              <div class="absolute inset-0 rounded-2xl ring-2 ring-primary opacity-100 transition-opacity pointer-events-none"></div>
+              <div class="flex justify-between items-start">
+                <div class="flex items-center gap-4">
+                  <div class="w-6 h-6 rounded-full border-2 border-primary bg-primary flex items-center justify-center radio-circle"><div class="w-2.5 h-2.5 rounded-full bg-white opacity-100 radio-dot"></div></div>
+                  <span class="text-lg font-bold text-white flex items-center gap-2">VIP Access <span class="material-symbols-outlined text-[18px] text-primary drop-shadow-[0_0_8px_rgba(59, 130, 246,0.5)]">star</span></span>
+                </div>
+                <span class="text-2xl font-extrabold text-white">$450</span>
+              </div>
+              <p class="font-body-md text-on-surface-variant pl-10 text-sm leading-relaxed">Expedited entry, exclusive tech-lounge access, premium viewing areas, and artist Q&A.</p>
+            </label>
+          </div>
+          <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-2"></div>
+          <div class="flex flex-col gap-6">
+            <div class="flex justify-between items-end px-2">
+              <span class="font-body-lg text-xl text-on-surface-variant">Total</span>
+              <span class="text-5xl font-extrabold text-white tracking-tight" id="price-display">$450</span>
+            </div>
+            <a id="checkout-btn" href="/upcoming" class="w-full bg-white text-[#070b19] font-bold py-4 rounded-full shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500 active:scale-[0.98] flex justify-center items-center gap-2 group text-sm">
+              <span>Continue to Checkout</span>
+              <span class="w-5 h-5 rounded-full bg-[#070b19] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5"><span class="material-symbols-outlined text-[12px] font-bold">arrow_forward</span></span>
+            </a>
+            <p class="text-center font-label-md text-xs tracking-wider text-on-surface-variant/60 uppercase">Secure transaction via MYHitch Pass</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="bg-background w-full py-16 border-t border-white/5 mt-32 relative z-10">
+  <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto gap-8">
+    <div class="flex flex-col items-center md:items-start gap-2">
+      <a href="/home" class="block mb-2">
+        <img src="/logo.webp" alt="MYHitch Pass" width="130" height="130" class="w-[130px] h-auto object-contain select-none" style="filter: none;">
+      </a>
+      <span class="font-body-md text-sm text-on-surface-variant/60">© 2024 MYHitch Pass. All rights reserved.</span>
+    </div>
+    <nav class="flex flex-wrap justify-center gap-8">
+      <a href="/terms" class="font-label-md text-sm tracking-wide text-on-surface-variant hover:text-white transition-colors uppercase">Terms of Service</a>
+      <a href="/privacy" class="font-label-md text-sm tracking-wide text-on-surface-variant hover:text-white transition-colors uppercase">Privacy Policy</a>
+      <a href="/home" class="font-label-md text-sm tracking-wide text-on-surface-variant hover:text-white transition-colors uppercase">Contact Support</a>
+    </nav>
+  </div>
+</footer>
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+var EVENTS = [
+  { id:1, cat:'FESTIVALS',  name:'Neon Horizon Music Festival',        loc:'San Francisco', price:89,  alloc:74, hot:true,  img:'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=600', mon:'Jul', day:'12', tc:'200 100% 50%', perks:['Access to 3 unique stages','Top-tier international DJ lineup'] },
+  { id:2, cat:'CONCERTS',   name:'Acoustic Sessions: Live and Intimate', loc:'Boston',       price:45,  alloc:78, hot:true,  img:'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80', mon:'Jun', day:'20', tc:'270 100% 60%', perks:['Award-winning singer-songwriter performances','Complimentary wine tasting on arrival'] },
+  { id:3, cat:'SPORTS',     name:'Championship Bowl 2026',              loc:'Chicago',       price:65,  alloc:82, hot:true,  img:'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80', mon:'Aug', day:'02', tc:'0 100% 60%',   perks:['Unrivaled stadium atmosphere with 12k+ fans','Giant screen replay coverage'] },
+  { id:4, cat:'THEATRE',    name:'Metropolis: The Immersive Stage Play', loc:'New York',     price:75,  alloc:75, hot:false, img:'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=800&q=80', mon:'Jul', day:'05', tc:'330 100% 60%', perks:['Multi-sensory surround sound audio','Full-room augmented projection loops'] },
+  { id:5, cat:'COMMUNITY',  name:'Tech Founders and Builders Summit',   loc:'San Francisco', price:120, alloc:84, hot:false, img:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80', mon:'Jun', day:'15', tc:'180 100% 50%', perks:['Keynote sessions from elite founders','Interactive roundtable workshops'] },
+  { id:6, cat:'CONCERTS',   name:'Sunsets and Symphony: Classical Remix', loc:'Los Angeles', price:55,  alloc:48, hot:false, img:'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=800&q=80', mon:'Aug', day:'18', tc:'220 100% 60%', perks:['Ocean cliffside amphitheater view','Remixed orchestral scores by modern synthesizers'] }
+];
+
+var EVENT_DETAILS_MAP = {
+  1: {
+    venueSub: 'Metro Arena Park, Baylands',
+    tags: ['ELECTRONIC MUSIC', '18+ EVENT', '3-DAY PASS'],
+    about: [
+      "Prepare to be transported into a realm where technology and sound converge. Neon Horizons is not just a festival; it's a meticulously crafted digital ecosystem. Experience state-of-the-art spatial audio, generative visual installations, and exclusive performances from the vanguard of electronic music.",
+      "This year's summit focuses on \"The Synesthetic Future,\" blurring the lines between what you hear and what you see. VIP pass holders gain access to the immersive tech-lounge, artist Q&A sessions, and premium viewing platforms overlooking the main visual canvas."
+    ],
+    guestsTitle: 'Headliners',
+    guests: [
+      { name: 'KINETIC VIBE', role: 'Live AV Set', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDc8ujJ3uW6askYZtZf5-FxU1yDlexagHSd8hEqAmnXj4LhFe0o3HZtYvP8r0xtqLiuj0a5G2eN1U8p7HzaXcATyq-wGhRQRtMqnJ4-4qdSeWJPqdZAKyS1mnSKuXAGr3MA1X0_nzRctcA6k34jodIeR-qvZyrA3Kkse3pQsUUtasIeOYvhtuFi7dBcrhJvntQPHxAA9Ot45blRNADucwqpZziU9jpe47VUI1qB2K6tF4snKd8wUzFg8jEA__sHYpNCbCxP2Ld0XEpq' },
+      { name: 'ECHO PULSE', role: 'DJ Set', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDywPGRdq3OTmVhLtJf92XnbyHZgqOwIByKyoRKJMwc8dONxE_YS3vcV4GpfnORkEvrfyM8m44Z2eJW_JusWDZPyjjai4fYb5m_-YJK8bx8qlpJ4GjnsBrHNu9ZsOFLc1DN2aniHpdq4YUTgb9TmDLZLUFnfrj7ByspYycljpD6B4stfpQP7l5ARtKRVERjb-gJH6ExMBtpdEvBc9tJdN-6-03FYnP-Zr4dpBQAD2BrNqOc2vA8X9P0HuY-1Cv2xUyCOEwYpLlp96ay' },
+      { name: 'VOID.GEN', role: 'Visual Architect', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCkTJppwvKTZ1nMZ5yriE-xqXi3UptQi8oaenN4O1rNUr0faxRLmq-5GAdHYGvBqZuvak0P-bR8sGyE3tsspwitZFIQdX0UHsK-rkSoSnmYK8ZV2SOqtg57pE_06u5ZmxTsOVmvlkrw9V4G1g25U0wJqR0QeGxss-XyKXCcX-T1SUMIr-teZvKnJY149dMuDkY5wlrTUPstQPUC3Bmxq0IksjVnogdyLBjPA4hKHeHCBf_O-IJpTUF5I3zdOe6Wrjwyz3E0z151RKxW' }
+    ]
+  },
+  2: {
+    venueSub: 'The Chandelier Cathedral Room',
+    tags: ['ACOUSTIC', 'ALL AGES', 'INTIMATE SET'],
+    about: [
+      "Experience an evening of soulful melodies and unfiltered storytelling. Acoustic Sessions brings together award-winning singer-songwriters for an intimate, candle-lit performance inside the historic Cathedral Room.",
+      "The night features unplugged renditions of billboard hits, raw storytelling behind the lyrics, and a complimentary wine tasting reception upon arrival. Perfect for music aficionados seeking a cozy and memorable experience."
+    ],
+    guestsTitle: 'Performers',
+    guests: [
+      { name: 'CLARA & THE CELLO', role: 'Acoustic Folk Duo', img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=300' },
+      { name: 'JONAS BLUEWOOD', role: 'Singer-Songwriter', img: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&q=80&w=300' },
+      { name: 'THE AMBER TRIO', role: 'Classical String Trio', img: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=300' }
+    ]
+  },
+  3: {
+    venueSub: 'Alliance Memorial Stadium',
+    tags: ['LIVE SPORTS', 'CHAMPIONSHIP', 'FAMILY-FRIENDLY'],
+    about: [
+      "Witness athletic history in the making at the Championship Bowl 2026. The top two teams in the league face off in a high-stakes, action-packed match to claim the ultimate cup.",
+      "Enjoy premium arena seating, giant screen replay coverage, standard concessions, and a thrilling half-time show featuring live music and light performances. An unmissable event for sports enthusiasts."
+    ],
+    guestsTitle: 'Featured Matchup',
+    guests: [
+      { name: 'CHICAGO LIONS', role: 'Eastern Division Champions', img: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=300' },
+      { name: 'VS', role: 'The Final Showdown', img: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=300' },
+      { name: 'BOSTON WARRIORS', role: 'Western Division Champions', img: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a27?auto=format&fit=crop&q=80&w=300' }
+    ]
+  },
+  4: {
+    venueSub: 'Metropolis Theatre Stage',
+    tags: ['IMMERSIVE THEATRE', 'DRAMA', 'AWARD-WINNING'],
+    about: [
+      "Metropolis is a groundbreaking immersive stage play that blends classical acting with futuristic projection mapping. Walk through the set and become part of the story as it unfolds all around you.",
+      "With multi-sensory surround sound audio and interactive set pieces, this play redefines the boundaries of modern live theater. Note: comfortable walking shoes are highly recommended."
+    ],
+    guestsTitle: 'Lead Cast & Crew',
+    guests: [
+      { name: 'MARCUS VANCE', role: 'as The Architect', img: 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&q=80&w=300' },
+      { name: 'ELENA ROSTOVA', role: 'as The Rebel Leader', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300' },
+      { name: 'DIRECTOR K. SATO', role: 'Creative Visionary', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=300' }
+    ]
+  },
+  5: {
+    venueSub: 'San Francisco Innovation Center',
+    tags: ['TECH SUMMIT', 'NETWORKING', 'FOUNDERS'],
+    about: [
+      "Join 1,000+ startup founders, developers, and venture capitalists at the Tech Founders and Builders Summit. A day dedicated to exploring emerging tech, fundraising strategies, and engineering scaling.",
+      "The ticket includes access to keynote panels, hands-on roundtables, and the networking after-hours cocktail reception. Elevate your startup journey and meet your next co-founder or investor."
+    ],
+    guestsTitle: 'Keynote Speakers',
+    guests: [
+      { name: 'DR. ARIS THORNE', role: 'AI Lab Director', img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=300' },
+      { name: 'SARAH CHEN', role: 'VC Partner', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300' },
+      { name: 'LIAM O\'CONNOR', role: 'SaaS Founder', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=300' }
+    ]
+  },
+  6: {
+    venueSub: 'Ocean Cliffside Amphitheater',
+    tags: ['CLASSICAL REMIX', 'OUTDOOR SHOW', 'EXCLUSIVE'],
+    about: [
+      "Experience classical masterpieces remixed by modern synthesizers under the stars. Set at the stunning Ocean Cliffside Amphitheater in Los Angeles, this event delivers a breathtaking sensory fusion.",
+      "Bring a blanket, enjoy the visual projection mapping onto the natural rock formations, and listen to standard-setting musicians perform a one-night-only set."
+    ],
+    guestsTitle: 'Featured Artists',
+    guests: [
+      { name: 'MAESTRO L. VANCE', role: 'Conductor', img: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&q=80&w=300' },
+      { name: 'SYNTHIA', role: 'Synth Soloist', img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=300' },
+      { name: 'THE BAY ORCHESTRA', role: 'Symphonic Ensemble', img: 'https://images.unsplash.com/photo-1469248184492-e99d8212e6fc?auto=format&fit=crop&q=80&w=300' }
+    ]
+  }
+};
+
+// ─── BOOT DYNAMIC RENDERING ──────────────────────────────────────────────────
+(function() {
+  var urlParams = new URLSearchParams(window.location.search);
+  var eventId = parseInt(urlParams.get('id')) || 1;
+  var event = null;
+
+  for (var i = 0; i < EVENTS.length; i++) {
+    if (EVENTS[i].id === eventId) {
+      event = EVENTS[i];
+      break;
+    }
+  }
+
+  if (!event) event = EVENTS[0];
+  var details = EVENT_DETAILS_MAP[event.id] || EVENT_DETAILS_MAP[1];
+
+  document.title = 'MYHitch Pass | ' + event.name;
+
+  var heroImg = document.getElementById('event-hero-img');
+  if (heroImg) {
+    heroImg.src = event.img;
+    heroImg.alt = event.name;
+  }
+
+  var tagsHtml = '';
+  for (var t = 0; t < details.tags.length; t++) {
+    tagsHtml += '<span class="inline-flex items-center gap-2 bg-[#070b19]/70 backdrop-blur-md text-white px-4 py-2 rounded-full text-xs font-semibold tracking-wider border border-white/10">';
+    tagsHtml += '<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>' + details.tags[t] + '</span>';
+  }
+  var tagsDiv = document.getElementById('event-tags');
+  if (tagsDiv) tagsDiv.innerHTML = tagsHtml;
+
+  var titleH1 = document.getElementById('event-title');
+  if (titleH1) {
+    var nameParts = event.name.split(':');
+    if (nameParts.length > 1) {
+      titleH1.innerHTML = nameParts[0] + '<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-tertiary">' + nameParts.slice(1).join(':') + '</span>';
+    } else {
+      titleH1.innerHTML = event.name;
+    }
+  }
+
+  var descP = document.getElementById('event-desc');
+  if (descP) descP.innerText = event.perks.join(' • ') + '.';
+
+  var dateP = document.getElementById('event-date');
+  if (dateP) {
+    dateP.innerHTML = event.mon + ' ' + event.day + ', 2026<br><span class="text-base text-on-surface-variant font-normal">Doors open at 8:00 PM</span>';
+  }
+  var venueP = document.getElementById('event-venue');
+  if (venueP) {
+    venueP.innerHTML = event.loc + '<br><span class="text-base text-on-surface-variant font-normal">' + details.venueSub + '</span>';
+  }
+
+  var aboutDiv = document.getElementById('event-about');
+  if (aboutDiv) {
+    var aboutHtml = '';
+    for (var a = 0; a < details.about.length; a++) {
+      aboutHtml += '<p>' + details.about[a] + '</p>';
+    }
+    aboutDiv.innerHTML = aboutHtml;
+  }
+
+  var guestsTitle = document.getElementById('guests-title');
+  if (guestsTitle) guestsTitle.innerText = details.guestsTitle;
+  
+  var guestsGrid = document.getElementById('guests-grid');
+  if (guestsGrid) {
+    var gridHtml = '';
+    for (var g = 0; g < details.guests.length; g++) {
+      var guest = details.guests[g];
+      gridHtml += '<div class="relative group aspect-[4/5] rounded-3xl overflow-hidden glass-panel cursor-pointer liquid-hover">';
+      gridHtml += '<img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="' + guest.img + '" alt="' + guest.name + '">';
+      gridHtml += '<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100"></div>';
+      gridHtml += '<div class="absolute bottom-0 left-0 p-6 transform transition-transform duration-500 group-hover:-translate-y-2">';
+      gridHtml += '<h3 class="text-2xl font-bold text-white mb-1">' + guest.name + '</h3>';
+      gridHtml += '<p class="font-label-md text-primary tracking-wider uppercase text-sm">' + guest.role + '</p>';
+      gridHtml += '</div></div>';
+    }
+    guestsGrid.innerHTML = gridHtml;
+  }
+
+  var ticketTiers = document.getElementById('ticket-tiers');
+  if (ticketTiers) {
+    var stdPrice = event.price;
+    var vipPrice = Math.round(event.price * 1.57);
+    var tiersHtml = '';
+    
+    tiersHtml += '<label class="relative flex flex-col gap-3 p-6 rounded-2xl border-2 border-white/10 bg-white/5 cursor-pointer hover:bg-white/10 transition-all duration-300 ticket-tier" data-price="' + stdPrice + '">';
+    tiersHtml += '<input class="peer sr-only" name="ticket_tier" type="radio" value="general">';
+    tiersHtml += '<div class="absolute inset-0 rounded-2xl ring-2 ring-primary opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></div>';
+    tiersHtml += '<div class="flex justify-between items-start">';
+    tiersHtml += '<div class="flex items-center gap-4">';
+    tiersHtml += '<div class="w-6 h-6 rounded-full border-2 border-white/20 flex items-center justify-center transition-colors radio-circle"><div class="w-2.5 h-2.5 rounded-full bg-white opacity-0 radio-dot"></div></div>';
+    tiersHtml += '<span class="text-lg font-bold text-white">General Admission</span>';
+    tiersHtml += '</div>';
+    tiersHtml += '<span class="text-2xl font-extrabold text-white">$' + stdPrice + '</span>';
+    tiersHtml += '</div>';
+    tiersHtml += '<p class="font-body-md text-on-surface-variant pl-10 text-sm leading-relaxed">Access to main event grounds, standard entry, and standard perks.</p>';
+    tiersHtml += '</label>';
+
+    tiersHtml += '<label class="relative flex flex-col gap-3 p-6 rounded-2xl border-2 border-primary/50 bg-primary/10 cursor-pointer hover:bg-primary/20 transition-all duration-300 ticket-tier" data-price="' + vipPrice + '">';
+    tiersHtml += '<input checked class="peer sr-only" name="ticket_tier" type="radio" value="vip">';
+    tiersHtml += '<div class="absolute inset-0 rounded-2xl ring-2 ring-primary opacity-100 transition-opacity pointer-events-none"></div>';
+    tiersHtml += '<div class="flex justify-between items-start">';
+    tiersHtml += '<div class="flex items-center gap-4">';
+    tiersHtml += '<div class="w-6 h-6 rounded-full border-2 border-primary bg-primary flex items-center justify-center radio-circle"><div class="w-2.5 h-2.5 rounded-full bg-white opacity-100 radio-dot"></div></div>';
+    tiersHtml += '<span class="text-lg font-bold text-white flex items-center gap-2">VIP Access <span class="material-symbols-outlined text-[18px] text-primary drop-shadow-[0_0_8px_rgba(59, 130, 246,0.5)]">star</span></span>';
+    tiersHtml += '</div>';
+    tiersHtml += '<span class="text-2xl font-extrabold text-white">$' + vipPrice + '</span>';
+    tiersHtml += '</div>';
+    tiersHtml += '<p class="font-body-md text-on-surface-variant pl-10 text-sm leading-relaxed">Expedited entry, exclusive lounge access, premium viewing areas, and creative perks.</p>';
+    tiersHtml += '</label>';
+
+    ticketTiers.innerHTML = tiersHtml;
+    document.getElementById('price-display').textContent = '$' + vipPrice;
+  }
+
+  var chkBtn = document.getElementById('checkout-btn');
+  if (chkBtn) {
+    chkBtn.href = '/upcoming?book=' + event.id;
+  }
+
+  wireTicketTiers();
+})();
+
+function wireTicketTiers() {
+  document.querySelectorAll('.ticket-tier').forEach(tier=>{
+    const input=tier.querySelector('input[type="radio"]');
+    const circle=tier.querySelector('.radio-circle');
+    const dot=tier.querySelector('.radio-dot');
+    const price=tier.getAttribute('data-price');
+    tier.addEventListener('click',()=>{
+      document.querySelectorAll('.ticket-tier').forEach(t=>{
+        t.querySelector('.radio-circle').classList.remove('border-primary','bg-primary');
+        t.querySelector('.radio-circle').classList.add('border-white/20');
+        t.querySelector('.radio-dot').classList.add('opacity-0');
+        t.querySelector('.radio-dot').classList.remove('opacity-100');
+      });
+      circle.classList.add('border-primary','bg-primary');
+      circle.classList.remove('border-white/20');
+      dot.classList.remove('opacity-0');
+      dot.classList.add('opacity-100');
+      const pd=document.getElementById('price-display');
+      pd.textContent='$'+price;
+      pd.style.transform='scale(1.05) translateY(-2px)';
+      pd.style.color='#3b82f6';
+      setTimeout(()=>{pd.style.transform='';pd.style.color='';},300);
+    });
+  });
+}
+
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{const h=document.querySelector('nav');if(window.scrollY>50)h.classList.add('py-2');else h.classList.remove('py-2');});
+</script>
+<script>
+(function() {
+  // Pointer trail circles logic for HoverButton
+  document.querySelectorAll('.hover-trail-button').forEach(button => {
+    let isListening = false;
+    let lastAdded = 0;
+
+    button.addEventListener('pointerenter', () => {
+      isListening = true;
+    });
+
+    button.addEventListener('pointerleave', () => {
+      isListening = false;
+    });
+
+    button.addEventListener('pointermove', (e) => {
+      if (!isListening) return;
+      const now = Date.now();
+      if (now - lastAdded > 100) {
+        lastAdded = now;
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const circle = document.createElement('div');
+        circle.className = 'pointer-trail-circle';
+        circle.style.left = x + 'px';
+        circle.style.top = y + 'px';
+        
+        const xPos = x / rect.width;
+        circle.style.background = 'linear-gradient(to right, #a0d9f8 ' + (xPos * 100) + '%, #3a5bbf ' + (xPos * 100) + '%)';
+
+        button.appendChild(circle);
+
+        setTimeout(() => {
+          circle.style.opacity = '0.75';
+        }, 50);
+
+        setTimeout(() => {
+          circle.style.opacity = '0';
+          circle.style.transition = 'opacity 1.2s ease';
+        }, 1000);
+
+        setTimeout(() => {
+          circle.remove();
+        }, 2200);
+      }
+    });
+  });
+})();
+</script>
+
+<!-- Dropdown Toggle Script -->
+<script>
+(function() {
+  document.querySelectorAll('.relative.group > a').forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const menu = this.nextElementSibling;
+      if (menu && menu.classList.contains('nav-dropdown-menu')) {
+        const isShown = menu.classList.contains('show-dropdown');
+        document.querySelectorAll('.nav-dropdown-menu').forEach(m => m.classList.remove('show-dropdown'));
+        if (!isShown) {
+          menu.classList.add('show-dropdown');
+        }
+      }
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.nav-dropdown-menu').forEach(m => m.classList.remove('show-dropdown'));
+  });
+})();
+</script>
+</body>
+</html>
